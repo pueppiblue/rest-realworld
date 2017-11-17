@@ -38,7 +38,10 @@ class ProgrammerController extends BaseController
             'nickname' => $programmer->nickname,
         ]);
 
-        $response = new Response('Programmer created and saved by me: The ALMIGHTY API', 201);
+        $data = $this->serializeProgrammer($programmer);
+
+        $response = new Response(json_encode($data), 201);
+        $response->headers->set('Content-Type', 'application/json');
         $response->headers->set('Location', $url);
 
         return $response;
