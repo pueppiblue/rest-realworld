@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="51eb5212-007a-404c-9237-3501f50cef95" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/composerJson.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/rest_real.iml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/symfony2.xml" afterPath="" />
+    <list default="true" id="51eb5212-007a-404c-9237-3501f50cef95" name="Default" comment="create programmers post endpoint&#10;&#10;  - create programmer from json data in request&#10;  - save programmmer&#10;  - return string as response&#10;  - mimic a client request with guzzle in testint.php">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
       <change beforePath="$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/Api/ProgrammerController.php" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/Api/ProgrammerController.php" />
       <change beforePath="$PROJECT_DIR$/testing.php" afterPath="$PROJECT_DIR$/testing.php" />
-      <change beforePath="$PROJECT_DIR$/web/.htaccess" afterPath="$PROJECT_DIR$/web/.htaccess" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,17 +18,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProgrammerController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ProgrammerController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/Api/ProgrammerController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="30" column="78" lean-forward="false" selection-start-line="30" selection-start-column="78" selection-end-line="30" selection-end-column="78" />
+            <state relative-caret-position="144">
+              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
@@ -99,9 +90,9 @@
         <option value="$PROJECT_DIR$/web/.htaccess" />
         <option value="$PROJECT_DIR$/testing.php" />
         <option value="$PROJECT_DIR$/src/KnpU/CodeBattle/DataFixtures/FixturesManager.php" />
-        <option value="$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/Api/ProgrammerController.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/Api/ProgrammerController.php" />
       </list>
     </option>
   </component>
@@ -348,12 +339,20 @@
       <updated>1510929154060</updated>
       <workItem from="1510929155478" duration="178000" />
       <workItem from="1510929867934" duration="2588000" />
-      <workItem from="1510932933108" duration="8305000" />
+      <workItem from="1510932933108" duration="8541000" />
     </task>
+    <task id="LOCAL-00001" summary="adjust htaccess for apache and composer install">
+      <created>1510950178167</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1510950178167</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11071000" />
+    <option name="totallyTimeSpent" value="11307000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="776" y="24" width="1873" height="1092" extended-state="6" />
@@ -362,6 +361,7 @@
       <window_info id="GfmBrowser" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3419355" sideWeight="0.5019178" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -387,6 +387,11 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="adjust htaccess for apache and composer install" />
+    <MESSAGE value="create programmers post endpoint&#10;&#10;  - create programmer from json data in request&#10;  - save programmmer&#10;  - return string as response&#10;  - mimic a client request with guzzle in testint.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="create programmers post endpoint&#10;&#10;  - create programmer from json data in request&#10;  - save programmmer&#10;  - return string as response&#10;  - mimic a client request with guzzle in testint.php" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -554,14 +559,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/Api/ProgrammerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="30" column="78" lean-forward="false" selection-start-line="30" selection-start-column="78" selection-end-line="30" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -582,6 +579,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="6" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/Api/ProgrammerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
