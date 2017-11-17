@@ -7,6 +7,7 @@ use KnpU\CodeBattle\Model\Programmer;
 use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProgrammerController extends BaseController
 {
@@ -40,6 +41,10 @@ class ProgrammerController extends BaseController
     public function showAction($nickname)
     {
         $programmer = $this->getProgrammerRepository()->findOneByNickname($nickname);
+
+        if (!$programmer) {
+            throw new NotFoundHttpException('Programmer '.$nickname.' not found in api database.');
+        }
 
         $data = [
             'nickname' => $programmer->nickname,
