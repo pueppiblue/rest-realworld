@@ -14,7 +14,8 @@ class ProgrammerController extends BaseController
     protected function addRoutes(ControllerCollection $controllers)
     {
         $controllers->post('/api/programmers', array($this, 'newAction'));
-        $controllers->get('/api/programmers/{nickname}', array($this, 'showAction'));
+        $controllers->get('/api/programmers/{nickname}', array($this, 'showAction'))
+            ->bind('api_programmers_show');
     }
 
     public function newAction(Request $request)
@@ -31,8 +32,12 @@ class ProgrammerController extends BaseController
             return 'Error when saving programmer resource: '.$e->getMessage();
         }
 
+        $url = $this->generateUrl('api_programmers_show', [
+            'nickname' => $programmer->nickname,
+        ]);
+
         $response = new Response('Programmer created and saved by me: The ALMIGHTY API', 201);
-        $response->headers->set('Location','/programmers/new_fake_programmer');
+        $response->headers->set('Location',$url);
 
         return $response;
 
