@@ -30,6 +30,7 @@ class ProgrammerController extends BaseController
         }
 
         $response = new Response('Programmer created and saved by me: The ALMIGHTY API', 201);
+        $response->headers->set('Location','/programmers/new_fake_programmer');
 
         return $response;
 
