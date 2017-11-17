@@ -6,6 +6,7 @@ use KnpU\CodeBattle\Controller\BaseController;
 use KnpU\CodeBattle\Model\Programmer;
 use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProgrammerController extends BaseController
 {
@@ -28,7 +29,9 @@ class ProgrammerController extends BaseController
             return 'Error when saving programmer resource: '.$e->getMessage();
         }
 
-        return 'Programmer created and saved by me: The ALMIGHTY API';
+        $response = new Response('Programmer created and saved by me: The ALMIGHTY API', 201);
+
+        return $response;
 
     }
 }
