@@ -2,152 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51eb5212-007a-404c-9237-3501f50cef95" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/composerJson.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/rest_real.iml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/symfony2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/LICENSE" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/README.md" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/bootstrap.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/behat.yml.dist" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/behat_defaults.yml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/composer.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/config.rb" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/features/api/ApiFeatureContext.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/features/api/ProjectContext.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/features/api/programmer.feature" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/features/web/WebFeatureContext.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/features/web/battle.feature" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/features/web/programmer.feature" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/features/web/users.feature" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Application.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Battle/BattleManager.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Battle/PowerManager.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Behat/EntityLookup.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/Api/ProgrammerController.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/BaseController.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/BattleController.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/DefaultController.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/ProgrammerController.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/TokenController.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/UserController.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/DataFixtures/FixturesManager.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Model/Battle.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Model/Programmer.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Model/Project.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Model/User.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Repository/BaseRepository.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Repository/BattleRepository.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Repository/ProgrammerRepository.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Repository/ProjectRepository.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Repository/RepositoryContainer.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Repository/UserRepository.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Security/Authentication/ApiAuthToken.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Security/Authentication/ApiEntryPoint.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Security/Authentication/ApiTokenListener.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Security/Authentication/ApiTokenProvider.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Security/Authentication/Exception/BadAuthHeaderFormatException.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Security/Authentication/Exception/BadAuthHeaderTypeException.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Security/Token/ApiToken.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Security/Token/ApiTokenRepository.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Twig/BattleExtension.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Validator/ApiValidator.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/testing.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/translations/en.yml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/_macros.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/battle/list.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/battle/show.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/homepage.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/layout.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/programmer/choose.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/programmer/new.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/programmer/show.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/tokens/index.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/tokens/new.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/user/login.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/user/register.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/.htaccess" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/css/styles.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/img/avatar1.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/img/avatar2.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/img/avatar3.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/img/avatar4.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/img/avatar5.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/img/avatar6.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/img/code-battle-logo.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/img/crossword.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/img/logo-2.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/img/pool_table_2X.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/index.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/js/bootstrap.min.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/sass/_base.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/sass/_rest.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/sass/styles.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/fonts/FontAwesome.otf" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/fonts/fontawesome-webfont.eot" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/fonts/fontawesome-webfont.svg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/fonts/fontawesome-webfont.ttf" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/fonts/fontawesome-webfont.woff" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/scss/_bordered-pulled.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/scss/_core.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/scss/_fixed-width.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/scss/_icons.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/scss/_larger.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/scss/_list.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/scss/_mixins.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/scss/_path.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/scss/_rotated-flipped.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/scss/_spinning.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/scss/_stacked.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/scss/_variables.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/font-awesome/scss/font-awesome.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_alerts.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_badges.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_breadcrumbs.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_button-groups.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_buttons.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_carousel.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_close.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_code.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_component-animations.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_dropdowns.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_forms.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_glyphicons.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_grid.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_input-groups.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_jumbotron.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_labels.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_list-group.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_media.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_mixins.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_modals.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_navbar.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_navs.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_normalize.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_pager.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_pagination.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_panels.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_popovers.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_print.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_progress-bars.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_responsive-utilities.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_scaffolding.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_tables.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_theme.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_thumbnails.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_tooltip.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_type.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_utilities.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_variables.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/_wells.scss" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/web/vendor/sass-bootstrap/bootstrap/bootstrap.scss" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/composerJson.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/rest_real.iml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/symfony2.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change beforePath="$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/Api/ProgrammerController.php" afterPath="$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/Api/ProgrammerController.php" />
+      <change beforePath="$PROJECT_DIR$/testing.php" afterPath="$PROJECT_DIR$/testing.php" />
+      <change beforePath="$PROJECT_DIR$/web/.htaccess" afterPath="$PROJECT_DIR$/web/.htaccess" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -160,12 +26,62 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ProgrammerController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/Api/ProgrammerController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="30" column="78" lean-forward="false" selection-start-line="30" selection-start-column="78" selection-end-line="30" selection-end-column="78" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="6" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/bootstrap.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="558">
+              <caret line="31" column="24" lean-forward="false" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FixturesManager.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/KnpU/CodeBattle/DataFixtures/FixturesManager.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="842">
+              <caret line="145" column="7" lean-forward="false" selection-start-line="145" selection-start-column="7" selection-end-line="145" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Programmer.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/KnpU/CodeBattle/Model/Programmer.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="504">
+              <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testing.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testing.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -179,7 +95,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/web/config.php" />
+        <option value="$PROJECT_DIR$/web/.htaccess" />
+        <option value="$PROJECT_DIR$/testing.php" />
+        <option value="$PROJECT_DIR$/src/KnpU/CodeBattle/DataFixtures/FixturesManager.php" />
+        <option value="$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/Api/ProgrammerController.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/composer.json" />
       </list>
     </option>
   </component>
@@ -195,7 +117,73 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/vendor/behat/mink-extension" />
+      <path value="$PROJECT_DIR$/vendor/behat/mink-browserkit-driver" />
+      <path value="$PROJECT_DIR$/vendor/behat/mink-selenium2-driver" />
+      <path value="$PROJECT_DIR$/vendor/behat/mink-goutte-driver" />
+      <path value="$PROJECT_DIR$/vendor/behat/mink" />
+      <path value="$PROJECT_DIR$/vendor/behat/gherkin" />
+      <path value="$PROJECT_DIR$/vendor/behat/behat" />
+      <path value="$PROJECT_DIR$/vendor/silex/silex" />
+      <path value="$PROJECT_DIR$/vendor/fabpot/goutte" />
+      <path value="$PROJECT_DIR$/vendor/guzzle/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/pimple/pimple" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit-mock-objects" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dependency-injection" />
+      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/vendor/symfony/validator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/expression-language" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/config" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/instaclick/php-webdriver" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php70" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-util" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-acl" />
+      <path value="$PROJECT_DIR$/vendor/symfony/property-access" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php54" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php55" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php56" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/ircmaxell/password-compat" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+    </include_path>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="776" />
     <option name="y" value="24" />
@@ -256,7 +244,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -267,7 +254,39 @@
             <path>
               <item name="rest-realworld" type="b2602c69:ProjectViewProjectNode" />
               <item name="rest-realworld" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="rest-realworld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rest-realworld" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="data" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="rest-realworld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rest-realworld" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="features" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="rest-realworld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rest-realworld" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="features" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="rest-realworld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rest-realworld" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="rest-realworld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rest-realworld" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="KnpU" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="rest-realworld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rest-realworld" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="translations" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="rest-realworld" type="b2602c69:ProjectViewProjectNode" />
@@ -279,10 +298,26 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Extensions" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+            </path>
+            <path>
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Extensions" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+              <item name="com.intellij.database" type="61db50fb:ScratchProjectViewPane$MyPsiNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
@@ -312,26 +347,27 @@
       <option name="presentableId" value="Default" />
       <updated>1510929154060</updated>
       <workItem from="1510929155478" duration="178000" />
-      <workItem from="1510929867934" duration="175000" />
+      <workItem from="1510929867934" duration="2588000" />
+      <workItem from="1510932933108" duration="8305000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="353000" />
+    <option name="totallyTimeSpent" value="11071000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="49" y="-4" width="1871" height="1084" extended-state="6" />
+    <frame x="776" y="24" width="1873" height="1092" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="GfmBrowser" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3419355" sideWeight="0.5019178" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25260273" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3419355" sideWeight="0.4980822" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25534245" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -357,6 +393,191 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-54">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="108">
+            <caret line="4" column="84" lean-forward="true" selection-start-line="4" selection-start-column="84" selection-end-line="4" selection-end-column="84" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="Gfm">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/development.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/http-foundation/Request.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="1478" column="20" lean-forward="false" selection-start-line="1478" selection-start-column="20" selection-end-line="1478" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KnpU/CodeBattle/Repository/BaseRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-648">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KnpU/CodeBattle/Repository/ProgrammerRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/silex/silex/src/Silex/ControllerProviderInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="18" column="10" lean-forward="false" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="20" lean-forward="true" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/silex/silex/src/Silex/Application.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="571">
+          <caret line="546" column="33" lean-forward="false" selection-start-line="546" selection-start-column="33" selection-end-line="546" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KnpU/CodeBattle/Application.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="78" column="23" lean-forward="false" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/BaseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="22" column="46" lean-forward="false" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KnpU/CodeBattle/Model/Programmer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KnpU/CodeBattle/DataFixtures/FixturesManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="842">
+          <caret line="145" column="7" lean-forward="false" selection-start-line="145" selection-start-column="7" selection-end-line="145" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="31" column="24" lean-forward="false" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KnpU/CodeBattle/Controller/Api/ProgrammerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="30" column="78" lean-forward="false" selection-start-line="30" selection-start-column="78" selection-end-line="30" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.lock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2322">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
