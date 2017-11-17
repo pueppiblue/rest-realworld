@@ -5,9 +5,9 @@ imports:
 default:
     context:
         parameters:
-            base_url: http://localhost:8000
+            base_url: http://rest-realworld.local
 
 web:
     extensions:
         Behat\MinkExtension\Extension:
-            base_url: http://localhost:8000
+            base_url: http://rest-realworld.local
