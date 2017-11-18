@@ -125,6 +125,10 @@ class ProgrammerController extends BaseController
     {
         $data = json_decode($request->getContent(), true);
 
+        if ($data === null) {
+            throw new Exception('Invalid JSON in Request: ' . $request->getContent());
+        }
+
         $programmer->userId = $this->findUserByUsername('weaverryan')->id;
 
         foreach ($data as $key => $value) {
