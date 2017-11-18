@@ -66,7 +66,17 @@ Feature: Programmer
     And the "tagLine" property should equal "But i love BEHAT!"
     And the "avatarNumber" property should equal "1"
     And the "nickname" property should equal "UnitTester"
-#
+
+  Scenario: DELETE a programmer
+    Given the following programmers exist:
+      | nickname    | avatarNumber  | tagLine         |
+      | UnitTester  | 3             | I like PHPUnit  |
+    When I request "DELETE /api/programmers/UnitTester"
+    Then the response status code should be 204
+
+
+
+
 #  Scenario: Throw an Error if not sending json on PUT
 #    Given the following programmers exist:
 #      | nickname      | avatarNumber  |

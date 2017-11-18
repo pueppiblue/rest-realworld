@@ -22,9 +22,6 @@ $request = $client->post('/api/programmers', null, json_encode($data));
 $response = $request->send();
 
 
-echo $response;
-echo "\n\n";die;
-
 $url = $response->getHeader('Location');
 $request = $client->get($url);
 $response = $request->send();
@@ -33,3 +30,7 @@ $response = $request->send();
 $request = $client->get('/api/programmers');
 $response = $request->send();
 
+
+
+echo $response;
+echo "\n\n";

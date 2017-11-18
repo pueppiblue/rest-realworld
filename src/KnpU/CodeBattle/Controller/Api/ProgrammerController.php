@@ -21,8 +21,9 @@ class ProgrammerController extends BaseController
             ->bind('api_programmers_list');
         $controllers->get('/api/programmers/{nickname}', array($this, 'showAction'))
             ->bind('api_programmers_show');
-        $controllers->put('/api/programmers/{nickname}', array($this, 'updateAction'))
-            ->bind('api_programmers_update');
+        $controllers->put('/api/programmers/{nickname}', array($this, 'updateAction'));
+        $controllers->delete('/api/programmers/{nickname}', array($this, 'deleteAction'))
+            ->bind('api_programmers_delete');
     }
 
     public function newAction(Request $request)
@@ -148,5 +149,21 @@ class ProgrammerController extends BaseController
 
     }
 
+    /**
+     * @param $nickname
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function deleteAction($nickname)
+    {
+        $programmer = $this->getProgrammerRepository()->findOneByNickname($nickname);
+        try {
+            $this->delete($programmer);
+        } catch (Exception $e) {
+            throw new Exception('Error deleting Programmer '.$nickname.'. '.$e->getMessage());
+        }
 
+        return new JsonResponse(null, 204);
+
+    }
 }
