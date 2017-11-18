@@ -68,13 +68,30 @@ Feature: Programmer
     And the "avatarNumber" property should equal "1"
     And the "nickname" property should equal "UnitTester"
 
+  Scenario: Use PATCH to edit a programmer
+    Given the following programmers exist:
+      | nickname    | avatarNumber  | tagLine         |
+      | UnitTester  | 3             | I like PHPUnit  |
+    And I have the payload:
+      """
+        {
+          "tagLine": "But i love BEHAT!"
+        }
+      """
+    When I request "PATCH /api/programmers/UnitTester"
+    Then the response status code should be 200
+    And the "Location" header should be "/api/programmers/UnitTester"
+    And the "tagLine" property should equal "But i love BEHAT!"
+    And the "avatarNumber" property should equal "3"
+    And the "nickname" property should equal "UnitTester"
+
+
   Scenario: DELETE a programmer
     Given the following programmers exist:
       | nickname    | avatarNumber  | tagLine         |
       | UnitTester  | 3             | I like PHPUnit  |
     When I request "DELETE /api/programmers/UnitTester"
     Then the response status code should be 204
-
 
 
 

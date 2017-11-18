@@ -22,6 +22,7 @@ class ProgrammerController extends BaseController
         $controllers->get('/api/programmers/{nickname}', array($this, 'showAction'))
             ->bind('api_programmers_show');
         $controllers->put('/api/programmers/{nickname}', array($this, 'updateAction'));
+        $controllers->patch('/api/programmers/{nickname}', array($this, 'updateAction'));
         $controllers->delete('/api/programmers/{nickname}', array($this, 'deleteAction'))
             ->bind('api_programmers_delete');
     }
@@ -151,17 +152,22 @@ class ProgrammerController extends BaseController
 
         $isNew = ($programmer->id === null);
 
-        // is PATCH functionality
-        // PUT should iterate over object properties and set them
-        // to NULL if not defined in request entity
-        foreach ($data as $key => $value) {
-            // do not overwrite nickname if programmer is not new
-            if (($key !== 'nickname' || $isNew) && property_exists($programmer, $key)) {
-                $programmer->$key = $value;
-            }
+        // define properties managed by the api
+        $apiProperties = ['avatarNumber', 'tagLine'];
+        if ($isNew) {
+            $apiProperties[] = 'nickname';
         }
 
+        foreach ($apiProperties as $property) {
+            if (!isset($data[$property]) && $request->isMethod('PATCH')) {
+                continue;
+            }
+            if (property_exists($programmer, $property)) {
+                $programmer->$property = isset($data[$property]) ? $data[$property] : null;
+            }
+        }
         $programmer->userId = $this->findUserByUsername('weaverryan')->id;
+
         try {
             $this->save($programmer);
         } catch (Exception $e) {
