@@ -123,6 +123,14 @@ class ApiFeatureContext extends BehatContext
     }
 
     /**
+     * @BeforeScenario
+     */
+    public function clearDatabase()
+    {
+        $this->getProjectHelper()->reloadDatabase();
+    }
+
+    /**
      * @Given /^I have the payload:$/
      */
     public function iHaveThePayload(PyStringNode $requestPayload)
