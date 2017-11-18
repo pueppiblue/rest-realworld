@@ -18,6 +18,8 @@ class ProgrammerController extends BaseController
             ->bind('api_programmers_list');
         $controllers->get('/api/programmers/{nickname}', array($this, 'showAction'))
             ->bind('api_programmers_show');
+        $controllers->put('/api/programmers/{nickname}', array($this, 'updateAction'))
+            ->bind('api_programmers_update');
     }
 
     public function newAction(Request $request)
@@ -75,6 +77,32 @@ class ProgrammerController extends BaseController
 
         return $response;
     }
+
+    public function updateAction($nickname, Request $request)
+    {
+        $programmer = $this->getProgrammerRepository()->findOneByNickname($nickname);
+        if (!$programmer) {
+            throw new NotFoundHttpException('Programmer ' . $nickname . ' not found in api database.');
+        }
+
+        $data = json_decode($request->getContent(), true);
+        $programmer->avatarNumber = $data['avatarNumber'];
+        $programmer->tagLine = $data['tagLine'];
+        $programmer->userId = $this->findUserByUsername('weaverryan')->id;
+
+        try {
+            $this->getProgrammerRepository()->save($programmer);
+        } catch (\Exception $e) {
+            return 'Error when saving programmer resource: ' . $e->getMessage();
+        }
+
+        return new JsonResponse(
+            $this->serializeProgrammer($programmer),
+            200,
+            ['Location' => $request->getRequestUri()]
+        );
+    }
+
 
     /**
      * @param Programmer $programmer
