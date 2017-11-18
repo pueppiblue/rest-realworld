@@ -2,8 +2,11 @@
 
 namespace KnpU\CodeBattle\Controller\Api;
 
+use Exception;
 use KnpU\CodeBattle\Controller\BaseController;
 use KnpU\CodeBattle\Model\Programmer;
+use ReflectionClass;
+use ReflectionProperty;
 use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,16 +27,12 @@ class ProgrammerController extends BaseController
 
     public function newAction(Request $request)
     {
-        $data = json_decode($request->getContent(), true);
-
-        $programmer = new Programmer($data['nickname'], $data['avatarNumber']);
-        $programmer->tagLine = $data['tagLine'];
-        $programmer->userId = $this->findUserByUsername('weaverryan')->id;
+        $programmer = new Programmer();
 
         try {
-            $this->save($programmer);
-        } catch (\Exception $e) {
-            return 'Error when saving programmer resource: ' . $e->getMessage();
+            $this->handleRequest($request, $programmer);
+        } catch (Exception $e) {
+            return 'Error when handling request: ' . $e->getMessage();
         }
 
         $url = $this->generateUrl('api_programmers_show', [
@@ -85,15 +84,10 @@ class ProgrammerController extends BaseController
             throw new NotFoundHttpException('Programmer ' . $nickname . ' not found in api database.');
         }
 
-        $data = json_decode($request->getContent(), true);
-        $programmer->avatarNumber = $data['avatarNumber'];
-        $programmer->tagLine = $data['tagLine'];
-        $programmer->userId = $this->findUserByUsername('weaverryan')->id;
-
         try {
-            $this->getProgrammerRepository()->save($programmer);
-        } catch (\Exception $e) {
-            return 'Error when saving programmer resource: ' . $e->getMessage();
+            $this->handleRequest($request, $programmer);
+        } catch (Exception $e) {
+            return 'Error when handling request: ' . $e->getMessage();
         }
 
         return new JsonResponse(
@@ -110,12 +104,41 @@ class ProgrammerController extends BaseController
      */
     private function serializeProgrammer(Programmer $programmer)
     {
-        return [
-            'nickname' => $programmer->nickname,
-            'avatarNumber' => $programmer->avatarNumber,
-            'powerLevel' => $programmer->powerLevel,
-            'tagLine' => $programmer->tagLine,
-        ];
+        $reflection = new ReflectionClass(Programmer::class);
+        $props = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);
+
+        $data = [];
+        foreach ($props as $prop) {
+            $data[$prop->getName()] = $prop->getValue($programmer);
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param Request $request
+     * @param Programmer $programmer
+     * @return void
+     * @throws Exception
+     */
+    private function handleRequest(Request $request, Programmer $programmer)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $programmer->userId = $this->findUserByUsername('weaverryan')->id;
+
+        foreach ($data as $key => $value) {
+            if (property_exists($programmer, $key)) {
+                $programmer->$key = $value;
+            }
+        }
+
+        try {
+            $this->save($programmer);
+        } catch (Exception $e) {
+            throw new Exception('Error saving programmer resource: '.$e->getMessage());
+        }
+
     }
 
 
