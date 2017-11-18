@@ -55,7 +55,7 @@ Feature: Programmer
     And I have the payload:
       """
         {
-          "nickname": "UnitTester",
+          "nickname": "FuncTester",
           "avatarNumber": "1",
           "tagLine": "But i love BEHAT!"
         }
@@ -65,3 +65,20 @@ Feature: Programmer
     And the "Location" header should be "/api/programmers/UnitTester"
     And the "tagLine" property should equal "But i love BEHAT!"
     And the "avatarNumber" property should equal "1"
+    And the "nickname" property should equal "UnitTester"
+#
+#  Scenario: Throw an Error if not sending json on PUT
+#    Given the following programmers exist:
+#      | nickname      | avatarNumber  |
+#      | UnitTester    | 3             |
+#    And I have the payload:
+#      """
+#        {
+#          "nickname": "UnitTester"
+#          "avatarNumber" => "1"
+#          "tagLine" = "But i love BEHAT!"
+#        }
+#      """
+#
+#    When I request "PUT /api/programmers/UnitTester"
+#    Then the response status code should be 500

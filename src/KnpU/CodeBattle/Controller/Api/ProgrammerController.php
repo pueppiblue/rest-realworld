@@ -123,24 +123,27 @@ class ProgrammerController extends BaseController
      */
     private function handleRequest(Request $request, Programmer $programmer)
     {
+
         $data = json_decode($request->getContent(), true);
 
         if ($data === null) {
             throw new Exception('Invalid JSON in Request: ' . $request->getContent());
         }
 
-        $programmer->userId = $this->findUserByUsername('weaverryan')->id;
+        $isNew = !isset($programmer->id);
 
         foreach ($data as $key => $value) {
-            if (property_exists($programmer, $key)) {
+            // do not overwrite nickname if programmer is not new
+            if (($key !== 'nickname' || $isNew) && property_exists($programmer, $key)) {
                 $programmer->$key = $value;
             }
         }
 
+        $programmer->userId = $this->findUserByUsername('weaverryan')->id;
         try {
             $this->save($programmer);
         } catch (Exception $e) {
-            throw new Exception('Error saving programmer resource: '.$e->getMessage());
+            throw new Exception('Error saving programmer resource: ' . $e->getMessage());
         }
 
     }
