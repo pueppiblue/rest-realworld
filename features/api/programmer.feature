@@ -57,7 +57,8 @@ Feature: Programmer
         {
           "nickname": "FuncTester",
           "avatarNumber": "1",
-          "tagLine": "But i love BEHAT!"
+          "tagLine": "But i love BEHAT!",
+          "powerLevel": "4"
         }
       """
     When I request "PUT /api/programmers/UnitTester"

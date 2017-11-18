@@ -100,6 +100,24 @@ class ProgrammerController extends BaseController
 
 
     /**
+     * @param $nickname
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function deleteAction($nickname)
+    {
+        $programmer = $this->getProgrammerRepository()->findOneByNickname($nickname);
+        try {
+            $this->delete($programmer);
+        } catch (Exception $e) {
+            throw new Exception('Error deleting Programmer '.$nickname.'. '.$e->getMessage());
+        }
+
+        return new JsonResponse(null, 204);
+
+    }
+
+    /**
      * @param Programmer $programmer
      * @return array
      */
@@ -131,8 +149,11 @@ class ProgrammerController extends BaseController
             throw new Exception('Invalid JSON in Request: ' . $request->getContent());
         }
 
-        $isNew = !isset($programmer->id);
+        $isNew = ($programmer->id === null);
 
+        // is PATCH functionality
+        // PUT should iterate over object properties and set them
+        // to NULL if not defined in request entity
         foreach ($data as $key => $value) {
             // do not overwrite nickname if programmer is not new
             if (($key !== 'nickname' || $isNew) && property_exists($programmer, $key)) {
@@ -146,24 +167,6 @@ class ProgrammerController extends BaseController
         } catch (Exception $e) {
             throw new Exception('Error saving programmer resource: ' . $e->getMessage());
         }
-
-    }
-
-    /**
-     * @param $nickname
-     * @return JsonResponse
-     * @throws Exception
-     */
-    public function deleteAction($nickname)
-    {
-        $programmer = $this->getProgrammerRepository()->findOneByNickname($nickname);
-        try {
-            $this->delete($programmer);
-        } catch (Exception $e) {
-            throw new Exception('Error deleting Programmer '.$nickname.'. '.$e->getMessage());
-        }
-
-        return new JsonResponse(null, 204);
 
     }
 }
