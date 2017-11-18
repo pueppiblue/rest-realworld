@@ -47,3 +47,21 @@ Feature: Programmer
     Then the response status code should be 200
     And the "programmers" property should be an array
     And the "programmers" property should contain 4 items
+
+  Scenario: Use PUT to edit a programmer
+    Given the following programmers exist:
+      | nickname    | avatarNumber  | tagLine         |
+      | UnitTester  | 3             | I like PHPUnit  |
+    And I have the payload:
+      """
+        {
+          "nickname": "UnitTester",
+          "avatarNumber": "1",
+          "tagLine": "But i love BEHAT!"
+        }
+      """
+    When I request "PUT /api/programmers/UnitTester"
+    Then the response status code should be 200
+    And the "Location" header should be "/api/programmers/UnitTester"
+    And the "tagLine" property should equal "But i love BEHAT!"
+    And the "avatarNumber" property should equal "1"
