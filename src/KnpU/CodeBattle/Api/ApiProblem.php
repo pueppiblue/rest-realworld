@@ -93,5 +93,15 @@ class ApiProblem
         $this->title = self::$titles[$type];
     }
 
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+
+
 
 }
