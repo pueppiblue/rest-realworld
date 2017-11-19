@@ -4,9 +4,16 @@ namespace KnpU\CodeBattle\Api;
 
 class ApiProblem
 {
+    const TYPE_VALIDATION_ERROR = 'validation_error';
     /**
      * @var string
      */
+
+    /**@var array $titles */
+    private static $titles = [
+        self::TYPE_VALIDATION_ERROR => 'Validation error occurred.'
+    ];
+
     private $type;
     /**
      * @var int
@@ -23,13 +30,13 @@ class ApiProblem
      * ApiProblem constructor.
      * @param string $type
      * @param int $statusCode
-     * @param string $title
+     * @throws \Exception
      */
-    public function __construct(int $statusCode, string $type, string $title)
+    public function __construct(int $statusCode, string $type)
     {
         $this->type = $type;
         $this->statusCode = $statusCode;
-        $this->title = $title;
+        $this->setTitle($type);
     }
 
     /**
@@ -67,6 +74,21 @@ class ApiProblem
                 'title' => $this->title,
             ]
         );
+    }
+
+    /**
+     * @param string $type
+     * @throws \Exception
+     */
+    private function setTitle(string $type)
+    {
+        if (!isset(self::$titles[$type])) {
+            throw new \Exception(
+                sprintf('Title for type: %s not found in ApiProblem Class.', $type)
+            );
+        }
+
+        $this->title = self::$titles[$type];
     }
 
 
