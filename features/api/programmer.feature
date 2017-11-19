@@ -61,7 +61,7 @@ Feature: Programmer
     And the "programmers" property should be an array
     And the "programmers" property should contain 4 items
 
-  Scenario: Use PUT to edit a programmer
+  Scenario: Use PUT to update a programmer
     Given the following programmers exist:
       | nickname    | avatarNumber  | tagLine         |
       | UnitTester  | 3             | I like PHPUnit  |
