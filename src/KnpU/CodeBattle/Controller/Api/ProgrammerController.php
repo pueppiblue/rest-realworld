@@ -42,7 +42,7 @@ class ProgrammerController extends BaseController
 
         $errors = $this->validate($programmer);
         if (!empty($errors)) {
-            return $this->handleValidationResponse($errors);
+            return $this->handleValidationErrors($errors);
         }
 
         try {
@@ -106,7 +106,7 @@ class ProgrammerController extends BaseController
 
         $errors = $this->validate($programmer);
         if (!empty($errors)) {
-            return $this->handleValidationResponse($errors);
+            return $this->handleValidationErrors($errors);
         }
 
         try {
@@ -170,7 +170,6 @@ class ProgrammerController extends BaseController
 
         $data = json_decode($request->getContent(), true);
 
-
         if ($data === null) {
             $apiProblem = new ApiProblem(
                 400,
@@ -202,9 +201,9 @@ class ProgrammerController extends BaseController
 
     /**
      * @param $errors
-     * @return JsonResponse with StatusCode 422
+     * @throws \KnpU\CodeBattle\Api\ApiProblemException
      */
-    private function handleValidationResponse($errors)
+    private function handleValidationErrors($errors)
     {
         $apiProblem = new ApiProblem(
             422,
@@ -212,7 +211,7 @@ class ProgrammerController extends BaseController
         );
         $apiProblem->setExtraData('errors', $errors);
 
-        return $apiProblem->createApiProblemResponse();
+        throw new ApiProblemException($apiProblem);
     }
 }
 
