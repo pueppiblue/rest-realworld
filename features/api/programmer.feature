@@ -35,6 +35,17 @@ Feature: Programmer
     And the "errors.nickname" property should exist
     And the "errors.avatarNumber" property should not exist
 
+  Scenario: Invalid JSON sent in request
+    Given I have the payload:
+      """
+        {
+          "avatarNumber": "2 :" 80"
+          "tagLine": "I am in for a test!"
+        }
+      """
+    When I request "POST /api/programmers"
+    Then the response status code should be 400
+
   Scenario: GET one programmer
     Given the following programmers exist:
       | nickname    | avatarNumber  |
