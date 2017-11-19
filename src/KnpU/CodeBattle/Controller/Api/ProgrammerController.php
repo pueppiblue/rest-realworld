@@ -4,6 +4,7 @@ namespace KnpU\CodeBattle\Controller\Api;
 
 use Exception;
 use KnpU\CodeBattle\Api\ApiProblem;
+use KnpU\CodeBattle\Api\ApiProblemException;
 use KnpU\CodeBattle\Controller\BaseController;
 use KnpU\CodeBattle\Model\Programmer;
 use ReflectionClass;
@@ -11,7 +12,6 @@ use ReflectionProperty;
 use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProgrammerController extends BaseController
@@ -38,7 +38,15 @@ class ProgrammerController extends BaseController
     {
         $programmer = new Programmer();
 
-        $this->handleRequest($request, $programmer);
+        try {
+            $this->handleRequest($request, $programmer);
+        } catch (ApiProblemException $e) {
+            return new JsonResponse(
+                $e->getApiProblem()->toArray(),
+                $e->getStatusCode(),
+                ['Content-Type' =>'application/problem+json']
+            );
+        }
 
         $errors = $this->validate($programmer);
         if (!empty($errors)) {
@@ -102,7 +110,15 @@ class ProgrammerController extends BaseController
             throw new NotFoundHttpException('Programmer ' . $nickname . ' not found in api database.');
         }
 
-        $this->handleRequest($request, $programmer);
+        try {
+            $this->handleRequest($request, $programmer);
+        } catch (ApiProblemException $e) {
+            return new JsonResponse(
+                $e->getApiProblem()->toArray(),
+                $e->getStatusCode(),
+                ['Content-Type' =>'application/problem+json']
+            );
+        }
 
         $errors = $this->validate($programmer);
         if (!empty($errors)) {
@@ -163,7 +179,7 @@ class ProgrammerController extends BaseController
      * @param Request $request
      * @param Programmer $programmer
      * @return void
-     * @throws HttpException
+     * @throws \KnpU\CodeBattle\Api\ApiProblemException
      */
     private function handleRequest(Request $request, Programmer $programmer)
     {
@@ -172,7 +188,13 @@ class ProgrammerController extends BaseController
 
 
         if ($data === null) {
-            throw new HttpException(400,'Invalid JSON in Request: ' . $request->getContent());
+            $apiProblem = new ApiProblem(
+                400,
+                ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT
+            );
+            throw new ApiProblemException(
+                $apiProblem
+            );
         }
 
         $isNew = ($programmer->id === null);
@@ -204,7 +226,7 @@ class ProgrammerController extends BaseController
             422,
             ApiProblem::TYPE_VALIDATION_ERROR
         );
-        $apiProblem->setExtraData('errors',$errors);
+        $apiProblem->setExtraData('errors', $errors);
 
         return new JsonResponse(
             $apiProblem->toArray(),
