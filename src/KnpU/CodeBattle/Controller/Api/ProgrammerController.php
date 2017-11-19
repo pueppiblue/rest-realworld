@@ -38,11 +38,7 @@ class ProgrammerController extends BaseController
     {
         $programmer = new Programmer();
 
-        try {
             $this->handleRequest($request, $programmer);
-        } catch (ApiProblemException $e) {
-            return $e->getApiProblem()->createApiProblemResponse();
-        }
 
         $errors = $this->validate($programmer);
         if (!empty($errors)) {
@@ -106,11 +102,7 @@ class ProgrammerController extends BaseController
             throw new NotFoundHttpException('Programmer ' . $nickname . ' not found in api database.');
         }
 
-        try {
             $this->handleRequest($request, $programmer);
-        } catch (ApiProblemException $e) {
-            return $e->getApiProblem()->createApiProblemResponse();
-        }
 
         $errors = $this->validate($programmer);
         if (!empty($errors)) {

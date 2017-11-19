@@ -3,6 +3,7 @@
 namespace KnpU\CodeBattle;
 
 use Doctrine\Common\Annotations\AnnotationReader;
+use KnpU\CodeBattle\Api\ApiProblemException;
 use KnpU\CodeBattle\Battle\PowerManager;
 use KnpU\CodeBattle\Repository\BattleRepository;
 use KnpU\CodeBattle\Repository\ProjectRepository;
@@ -286,6 +287,13 @@ class Application extends SilexApplication
 
     private function configureListeners()
     {
-        // todo
+        $this->error(function(\Exception $e, $statusCode) {
+           if (! $e instanceof ApiProblemException) {
+               return null;
+           }
+
+           return $e->getApiProblem()->createApiProblemResponse();
+
+        });
     }
 } 
