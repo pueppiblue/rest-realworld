@@ -3,6 +3,7 @@
 namespace KnpU\CodeBattle\Controller\Api;
 
 use Exception;
+use KnpU\CodeBattle\Api\ApiProblem;
 use KnpU\CodeBattle\Controller\BaseController;
 use KnpU\CodeBattle\Model\Programmer;
 use ReflectionClass;
@@ -43,7 +44,7 @@ class ProgrammerController extends BaseController
         }
 
         $errors = $this->validate($programmer);
-        if(!empty($errors)) {
+        if (!empty($errors)) {
             return $this->handleValidationResponse($errors);
         }
 
@@ -111,7 +112,7 @@ class ProgrammerController extends BaseController
         }
 
         $errors = $this->validate($programmer);
-        if(!empty($errors)) {
+        if (!empty($errors)) {
             return $this->handleValidationResponse($errors);
         }
 
@@ -141,7 +142,7 @@ class ProgrammerController extends BaseController
         try {
             $this->delete($programmer);
         } catch (Exception $e) {
-            throw new Exception('Error deleting Programmer '.$nickname.'. '.$e->getMessage());
+            throw new Exception('Error deleting Programmer ' . $nickname . '. ' . $e->getMessage());
         }
 
         return new JsonResponse(null, 204);
@@ -205,12 +206,18 @@ class ProgrammerController extends BaseController
      */
     private function handleValidationResponse($errors)
     {
-        $data = [
-            'type' => 'validation_error',
-            'title' => 'Validation error occured!',
-            'errors' => $errors,
-        ];
+        $apiProblem = new ApiProblem(
+            422,
+            'validation_error',
+            'Validation error occured!'
+        );
+        $apiProblem->setExtraData('errors',$errors);
 
-        return new JsonResponse($data, 422, ['Content-Type' => 'application/problem+json']);
+        return new JsonResponse(
+            $apiProblem->toArray(),
+            $apiProblem->getStatusCode(),
+            ['Content-Type' => 'application/problem+json']
+        );
     }
 }
+
