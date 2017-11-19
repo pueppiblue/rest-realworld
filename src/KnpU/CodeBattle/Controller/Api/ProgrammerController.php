@@ -27,6 +27,11 @@ class ProgrammerController extends BaseController
             ->bind('api_programmers_delete');
     }
 
+    /**
+     * @param Request $request
+     * @return string|JsonResponse
+     * @throws Exception
+     */
     public function newAction(Request $request)
     {
         $programmer = new Programmer();
@@ -35,6 +40,17 @@ class ProgrammerController extends BaseController
             $this->handleRequest($request, $programmer);
         } catch (Exception $e) {
             return 'Error when handling request: ' . $e->getMessage();
+        }
+
+        $errors = $this->validate($programmer);
+        if(!empty($errors)) {
+            return $this->handleValidationResponse($errors);
+        }
+
+        try {
+            $this->save($programmer);
+        } catch (Exception $e) {
+            throw new Exception('Error saving programmer resource: ' . $e->getMessage());
         }
 
         $url = $this->generateUrl('api_programmers_show', [
@@ -59,9 +75,7 @@ class ProgrammerController extends BaseController
             $data['programmers'][] = $this->serializeProgrammer($programmer);
         }
 
-        $response = new JsonResponse($data, 200);
-
-        return $response;
+        return new JsonResponse($data, 200);
     }
 
     public function showAction($nickname)
@@ -74,11 +88,15 @@ class ProgrammerController extends BaseController
 
         $data = $this->serializeProgrammer($programmer);
 
-        $response = new JsonResponse($data, 200);
-
-        return $response;
+        return new JsonResponse($data, 200);
     }
 
+    /**
+     * @param $nickname
+     * @param Request $request
+     * @return string|JsonResponse
+     * @throws Exception
+     */
     public function updateAction($nickname, Request $request)
     {
         $programmer = $this->getProgrammerRepository()->findOneByNickname($nickname);
@@ -91,6 +109,18 @@ class ProgrammerController extends BaseController
         } catch (Exception $e) {
             return 'Error when handling request: ' . $e->getMessage();
         }
+
+        $errors = $this->validate($programmer);
+        if(!empty($errors)) {
+            return $this->handleValidationResponse($errors);
+        }
+
+        try {
+            $this->save($programmer);
+        } catch (Exception $e) {
+            throw new Exception('Error saving programmer resource: ' . $e->getMessage());
+        }
+
 
         return new JsonResponse(
             $this->serializeProgrammer($programmer),
@@ -167,12 +197,20 @@ class ProgrammerController extends BaseController
             }
         }
         $programmer->userId = $this->findUserByUsername('weaverryan')->id;
+    }
 
-        try {
-            $this->save($programmer);
-        } catch (Exception $e) {
-            throw new Exception('Error saving programmer resource: ' . $e->getMessage());
-        }
+    /**
+     * @param $errors
+     * @return JsonResponse with StatusCode 422
+     */
+    private function handleValidationResponse($errors)
+    {
+        $data = [
+            'type' => 'validation_error',
+            'title' => 'Validation error occured!',
+            'errors' => $errors,
+        ];
 
+        return new JsonResponse($data, 422);
     }
 }

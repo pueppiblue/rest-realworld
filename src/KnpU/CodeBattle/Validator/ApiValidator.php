@@ -2,7 +2,7 @@
 
 namespace KnpU\CodeBattle\Validator;
 
-use Symfony\Component\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * A class that uses Symfony's validator, but flattens things down to a simpler
