@@ -211,6 +211,6 @@ class ProgrammerController extends BaseController
             'errors' => $errors,
         ];
 
-        return new JsonResponse($data, 422);
+        return new JsonResponse($data, 422, ['Content-Type' => 'application/problem+json']);
     }
 }

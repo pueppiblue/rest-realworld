@@ -31,6 +31,7 @@ Feature: Programmer
       """
     When I request "POST /api/programmers"
     Then the response status code should be 422
+    And the "Content-Type" header should be "application/problem+json"
     And the "errors.nickname" property should exist
     And the "errors.avatarNumber" property should not exist
 
