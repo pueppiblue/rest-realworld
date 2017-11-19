@@ -11,6 +11,7 @@ use ReflectionProperty;
 use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProgrammerController extends BaseController
@@ -37,11 +38,7 @@ class ProgrammerController extends BaseController
     {
         $programmer = new Programmer();
 
-        try {
-            $this->handleRequest($request, $programmer);
-        } catch (Exception $e) {
-            return 'Error when handling request: ' . $e->getMessage();
-        }
+        $this->handleRequest($request, $programmer);
 
         $errors = $this->validate($programmer);
         if (!empty($errors)) {
@@ -105,11 +102,7 @@ class ProgrammerController extends BaseController
             throw new NotFoundHttpException('Programmer ' . $nickname . ' not found in api database.');
         }
 
-        try {
-            $this->handleRequest($request, $programmer);
-        } catch (Exception $e) {
-            return 'Error when handling request: ' . $e->getMessage();
-        }
+        $this->handleRequest($request, $programmer);
 
         $errors = $this->validate($programmer);
         if (!empty($errors)) {
@@ -170,15 +163,16 @@ class ProgrammerController extends BaseController
      * @param Request $request
      * @param Programmer $programmer
      * @return void
-     * @throws Exception
+     * @throws HttpException
      */
     private function handleRequest(Request $request, Programmer $programmer)
     {
 
         $data = json_decode($request->getContent(), true);
 
+
         if ($data === null) {
-            throw new Exception('Invalid JSON in Request: ' . $request->getContent());
+            throw new HttpException(400,'Invalid JSON in Request: ' . $request->getContent());
         }
 
         $isNew = ($programmer->id === null);
