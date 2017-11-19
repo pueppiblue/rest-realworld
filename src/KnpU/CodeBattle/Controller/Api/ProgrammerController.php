@@ -41,11 +41,7 @@ class ProgrammerController extends BaseController
         try {
             $this->handleRequest($request, $programmer);
         } catch (ApiProblemException $e) {
-            return new JsonResponse(
-                $e->getApiProblem()->toArray(),
-                $e->getStatusCode(),
-                ['Content-Type' =>'application/problem+json']
-            );
+            return $e->getApiProblem()->createApiProblemResponse();
         }
 
         $errors = $this->validate($programmer);
@@ -113,11 +109,7 @@ class ProgrammerController extends BaseController
         try {
             $this->handleRequest($request, $programmer);
         } catch (ApiProblemException $e) {
-            return new JsonResponse(
-                $e->getApiProblem()->toArray(),
-                $e->getStatusCode(),
-                ['Content-Type' =>'application/problem+json']
-            );
+            return $e->getApiProblem()->createApiProblemResponse();
         }
 
         $errors = $this->validate($programmer);
@@ -228,11 +220,7 @@ class ProgrammerController extends BaseController
         );
         $apiProblem->setExtraData('errors', $errors);
 
-        return new JsonResponse(
-            $apiProblem->toArray(),
-            $apiProblem->getStatusCode(),
-            ['Content-Type' => 'application/problem+json']
-        );
+        return $apiProblem->createApiProblemResponse();
     }
 }
 

@@ -2,6 +2,8 @@
 
 namespace KnpU\CodeBattle\Api;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 class ApiProblem
 {
     const TYPE_VALIDATION_ERROR = 'validation_error';
@@ -42,12 +44,25 @@ class ApiProblem
     }
 
     /**
+     * @return JsonResponse
+     */
+    public function createApiProblemResponse(): JsonResponse
+    {
+        return new JsonResponse(
+            $this->toArray(),
+            $this->getStatusCode(),
+            ['Content-Type' =>'application/problem+json']
+        );
+    }
+
+    /**
      * @return int
      */
     public function getStatusCode(): int
     {
         return $this->statusCode;
     }
+
 
     /**
      * @return array
