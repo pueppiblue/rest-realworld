@@ -21,6 +21,19 @@ Feature: Programmer
     And the "Location" header should be "/api/programmers/GeekDev"
     And the "nickname" property should equal "GeekDev"
 
+  Scenario: Validation error on CREATE without a nickname property on Requiest Entity
+    Given I have the payload:
+      """
+        {
+          "avatarNumber": "2",
+          "tagLine": "I am in for a test!"
+        }
+      """
+    When I request "POST /api/programmers"
+    Then the response status code should be 422
+    And the "errors.nickname" property should exist
+    And the "errors.avatarNumber" property should not exist
+
   Scenario: GET one programmer
     Given the following programmers exist:
       | nickname    | avatarNumber  |
