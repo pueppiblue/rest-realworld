@@ -32,6 +32,7 @@ Feature: Programmer
     When I request "POST /api/programmers"
     Then the response status code should be 422
     And the "Content-Type" header should be "application/problem+json"
+    And the "type" property should equal "validation_error"
     And the "errors.nickname" property should exist
     And the "errors.avatarNumber" property should not exist
 
@@ -45,6 +46,8 @@ Feature: Programmer
       """
     When I request "POST /api/programmers"
     Then the response status code should be 400
+    And the "Content-Type" header should be "application/problem+json"
+    And the "type" property should equal "invalid_body_format"
 
   Scenario: GET one programmer
     Given the following programmers exist:
