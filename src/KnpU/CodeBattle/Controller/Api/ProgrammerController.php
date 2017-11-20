@@ -3,15 +3,14 @@
 namespace KnpU\CodeBattle\Controller\Api;
 
 use Exception;
+use JMS\Serializer\Serializer;
 use KnpU\CodeBattle\Api\ApiProblem;
 use KnpU\CodeBattle\Api\ApiProblemException;
 use KnpU\CodeBattle\Controller\BaseController;
 use KnpU\CodeBattle\Model\Programmer;
-use ReflectionClass;
-use ReflectionProperty;
 use Silex\ControllerCollection;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProgrammerController extends BaseController
@@ -31,14 +30,14 @@ class ProgrammerController extends BaseController
 
     /**
      * @param Request $request
-     * @return string|JsonResponse
+     * @return string|Response
      * @throws Exception
      */
     public function newAction(Request $request)
     {
         $programmer = new Programmer();
 
-            $this->handleRequest($request, $programmer);
+        $this->handleRequest($request, $programmer);
 
         $errors = $this->validate($programmer);
         if (!empty($errors)) {
@@ -55,9 +54,9 @@ class ProgrammerController extends BaseController
             'nickname' => $programmer->nickname,
         ]);
 
-        $data = $this->serializeProgrammer($programmer);
+        $json = $this->serialize($programmer);
 
-        $response = new JsonResponse($data, 201);
+        $response = new Response($json, 201);
         $response->headers->set('Location', $url);
 
         return $response;
@@ -68,12 +67,10 @@ class ProgrammerController extends BaseController
     {
         $programmers = $this->getProgrammerRepository()->findAll();
 
-        $data = ['programmers' => []];
-        foreach ($programmers as $programmer) {
-            $data['programmers'][] = $this->serializeProgrammer($programmer);
-        }
+        $data = ['programmers' => $programmers];
+        $json = $this->serialize($data);
 
-        return new JsonResponse($data, 200);
+        return new Response($json, 200);
     }
 
     public function showAction($nickname)
@@ -84,15 +81,15 @@ class ProgrammerController extends BaseController
             throw new NotFoundHttpException('Programmer ' . $nickname . ' not found in database.');
         }
 
-        $data = $this->serializeProgrammer($programmer);
+        $json = $this->serialize($programmer);
 
-        return new JsonResponse($data, 200);
+        return new Response($json, 200);
     }
 
     /**
      * @param $nickname
      * @param Request $request
-     * @return string|JsonResponse
+     * @return string|Response
      * @throws Exception
      */
     public function updateAction($nickname, Request $request)
@@ -102,7 +99,7 @@ class ProgrammerController extends BaseController
             throw new NotFoundHttpException('Programmer ' . $nickname . ' not found in api database.');
         }
 
-            $this->handleRequest($request, $programmer);
+        $this->handleRequest($request, $programmer);
 
         $errors = $this->validate($programmer);
         if (!empty($errors)) {
@@ -116,8 +113,8 @@ class ProgrammerController extends BaseController
         }
 
 
-        return new JsonResponse(
-            $this->serializeProgrammer($programmer),
+        return new Response(
+            $this->serialize($programmer),
             200,
             ['Location' => $request->getRequestUri()]
         );
@@ -126,7 +123,7 @@ class ProgrammerController extends BaseController
 
     /**
      * @param $nickname
-     * @return JsonResponse
+     * @return Response
      * @throws Exception
      */
     public function deleteAction($nickname)
@@ -138,25 +135,20 @@ class ProgrammerController extends BaseController
             throw new Exception('Error deleting Programmer ' . $nickname . '. ' . $e->getMessage());
         }
 
-        return new JsonResponse(null, 204);
+        return new Response(null, 204);
 
     }
 
     /**
-     * @param Programmer $programmer
+     * @param $data
      * @return array
      */
-    private function serializeProgrammer(Programmer $programmer)
+    private function serialize($data)
     {
-        $reflection = new ReflectionClass(Programmer::class);
-        $props = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);
+        /** @var Serializer $serializer */
+        $serializer = $this->container['serializer'];
 
-        $data = [];
-        foreach ($props as $prop) {
-            $data[$prop->getName()] = $prop->getValue($programmer);
-        }
-
-        return $data;
+        return $serializer->serialize($data, 'json');
     }
 
     /**
