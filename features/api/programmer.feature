@@ -63,6 +63,7 @@ Feature: Programmer
       tagLine
       """
     And the "nickname" property should equal "UnitTester"
+    And the "userId" property should not exist
 
   Scenario: GET non-existent programmer results in JSON 404 Response
     When I request "GET /api/programmers/non-existent-programmer"
