@@ -67,9 +67,8 @@ class Application extends SilexApplication
             // e.g. Api/FooController.php
             $cleanedPathName = $file->getRelativePathname();
             // e.g. Api\FooController.php
-            $cleanedPathName = str_replace('/', '\\', $cleanedPathName);
             // e.g. Api\FooController
-            $cleanedPathName = str_replace('.php', '', $cleanedPathName);
+            $cleanedPathName = str_replace(array('/', '.php'), array('\\', ''), $cleanedPathName);
 
             $class = 'KnpU\\CodeBattle\\Controller\\' . $cleanedPathName;
 
@@ -92,7 +91,7 @@ class Application extends SilexApplication
         $this->register(new TwigServiceProvider(), array(
             'twig.path' => $this['root_dir'] . '/views',
         ));
-        $app['twig'] = $this->share($this->extend('twig', function (\Twig_Environment $twig, $app) {
+        $app['twig'] = self::share($this->extend('twig', function (\Twig_Environment $twig, $app) {
             $twig->addExtension($app['twig.battle_extension']);
 
             return $twig;
@@ -117,7 +116,7 @@ class Application extends SilexApplication
         // Validation
         $this->register(new ValidatorServiceProvider());
         // configure validation to load from a YAML file
-        $this['validator.mapping.class_metadata_factory'] = $this->share(function () {
+        $this['validator.mapping.class_metadata_factory'] = self::share(function () {
             return new ClassMetadataFactory(
                 new AnnotationLoader($this['annotation_reader'])
             );
@@ -127,7 +126,7 @@ class Application extends SilexApplication
         $this->register(new TranslationServiceProvider(), array(
             'locale_fallbacks' => array('en'),
         ));
-        $this['translator'] = $this->share($this->extend('translator', function ($translator) {
+        $this['translator'] = self::share($this->extend('translator', function ($translator) {
             /** @var \Symfony\Component\Translation\Translator $translator */
             $translator->addLoader('yaml', new YamlFileLoader());
 
@@ -147,25 +146,25 @@ class Application extends SilexApplication
     {
         $app = $this;
 
-        $this['repository.user'] = $this->share(function () use ($app) {
+        $this['repository.user'] = self::share(function () use ($app) {
             $repo = new UserRepository($app['db'], $app['repository_container']);
             $repo->setEncoderFactory($app['security.encoder_factory']);
 
             return $repo;
         });
-        $this['repository.programmer'] = $this->share(function () use ($app) {
+        $this['repository.programmer'] = self::share(function () use ($app) {
             return new ProgrammerRepository($app['db'], $app['repository_container']);
         });
-        $this['repository.project'] = $this->share(function () use ($app) {
+        $this['repository.project'] = self::share(function () use ($app) {
             return new ProjectRepository($app['db'], $app['repository_container']);
         });
-        $this['repository.battle'] = $this->share(function () use ($app) {
+        $this['repository.battle'] = self::share(function () use ($app) {
             return new BattleRepository($app['db'], $app['repository_container']);
         });
-        $this['repository.api_token'] = $this->share(function () use ($app) {
+        $this['repository.api_token'] = self::share(function () use ($app) {
             return new ApiTokenRepository($app['db'], $app['repository_container']);
         });
-        $this['repository_container'] = $this->share(function () use ($app) {
+        $this['repository_container'] = self::share(function () use ($app) {
             return new RepositoryContainer($app, array(
                 'user' => 'repository.user',
                 'programmer' => 'repository.programmer',
@@ -175,23 +174,23 @@ class Application extends SilexApplication
             ));
         });
 
-        $this['battle.battle_manager'] = $this->share(function () use ($app) {
+        $this['battle.battle_manager'] = self::share(function () use ($app) {
             return new BattleManager(
                 $app['repository.battle'],
                 $app['repository.programmer']
             );
         });
-        $this['battle.power_manager'] = $this->share(function () use ($app) {
+        $this['battle.power_manager'] = self::share(function () use ($app) {
             return new PowerManager(
                 $app['repository.programmer']
             );
         });
 
-        $this['fixtures_manager'] = $this->share(function () use ($app) {
+        $this['fixtures_manager'] = self::share(function () use ($app) {
             return new FixturesManager($app);
         });
 
-        $this['twig.battle_extension'] = $this->share(function () use ($app) {
+        $this['twig.battle_extension'] = self::share(function () use ($app) {
             return new BattleExtension(
                 $app['request_stack'],
                 $app['repository.programmer'],
@@ -199,14 +198,14 @@ class Application extends SilexApplication
             );
         });
 
-        $this['annotation_reader'] = $this->share(function () {
+        $this['annotation_reader'] = self::share(function () {
             return new AnnotationReader();
         });
         // you could use a cache with annotations if you want
         //$this['annotations.cache'] = new PhpFileCache($this['root_dir'].'/cache');
         //$this['annotation_reader'] = new CachedReader($this['annotations_reader'], $this['annotations.cache'], $this['debug']);
 
-        $this['api.validator'] = $this->share(function () use ($app) {
+        $this['api.validator'] = self::share(function () use ($app) {
             return new ApiValidator($app['validator']);
         });
     }
@@ -219,7 +218,7 @@ class Application extends SilexApplication
             'security.firewalls' => array(
                 'api' => array(
                     'pattern' => '^/api',
-                    'users' => $this->share(function () use ($app) {
+                    'users' => self::share(function () use ($app) {
                         return $app['repository.user'];
                     }),
                     'stateless' => true,
@@ -229,7 +228,7 @@ class Application extends SilexApplication
                 'main' => array(
                     'pattern' => '^/',
                     'form' => true,
-                    'users' => $this->share(function () use ($app) {
+                    'users' => self::share(function () use ($app) {
                         return $app['repository.user'];
                     }),
                     'anonymous' => true,
@@ -249,21 +248,21 @@ class Application extends SilexApplication
         );
 
         // setup our custom API token authentication
-        $app['security.authentication_listener.factory.api_token'] = $app->protect(function ($name, $options) use ($app) {
+        $app['security.authentication_listener.factory.api_token'] = self::protect(function ($name) use ($app) {
 
             // the class that reads the token string off of the Authorization header
-            $app['security.authentication_listener.' . $name . '.api_token'] = $app->share(function () use ($app) {
+            $app['security.authentication_listener.' . $name . '.api_token'] = self::share(function () use ($app) {
                 return new ApiTokenListener($app['security'], $app['security.authentication_manager']);
             });
 
             // the class that looks up the ApiToken object in the database for the given token string
             // and authenticates the user if it's found
-            $app['security.authentication_provider.' . $name . '.api_token'] = $app->share(function () use ($app) {
+            $app['security.authentication_provider.' . $name . '.api_token'] = self::share(function () use ($app) {
                 return new ApiTokenProvider($app['repository.user'], $app['repository.api_token']);
             });
 
             // the class that decides what should happen if no authentication credentials are passed
-            $this['security.entry_point.' . $name . '.api_token'] = $app->share(function () use ($app) {
+            $this['security.entry_point.' . $name . '.api_token'] = self::share(function () use ($app) {
                 return new ApiEntryPoint($app['translator']);
             });
 
@@ -280,10 +279,10 @@ class Application extends SilexApplication
         });
 
         // expose a fake "user" service
-        $this['user'] = $this->share(function () use ($app) {
+        $this['user'] = self::share(function () use ($app) {
             $user = $app['security']->getToken()->getUser();
 
-            return is_object($user) ? $user : null;
+            return \is_object($user) ? $user : null;
         });
     }
 
