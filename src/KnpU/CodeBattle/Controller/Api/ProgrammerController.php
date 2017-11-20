@@ -3,7 +3,6 @@
 namespace KnpU\CodeBattle\Controller\Api;
 
 use Exception;
-use JMS\Serializer\Serializer;
 use KnpU\CodeBattle\Api\ApiProblem;
 use KnpU\CodeBattle\Api\ApiProblemException;
 use KnpU\CodeBattle\Controller\BaseController;
@@ -54,9 +53,7 @@ class ProgrammerController extends BaseController
             'nickname' => $programmer->nickname,
         ]);
 
-        $json = $this->serialize($programmer);
-
-        $response = new Response($json, 201);
+        $response = $this->createApiResponse($programmer, 201);
         $response->headers->set('Location', $url);
 
         return $response;
@@ -68,9 +65,9 @@ class ProgrammerController extends BaseController
         $programmers = $this->getProgrammerRepository()->findAll();
 
         $data = ['programmers' => $programmers];
-        $json = $this->serialize($data);
 
-        return new Response($json, 200);
+        return $this->createApiResponse($data, 200);
+
     }
 
     public function showAction($nickname)
@@ -81,9 +78,7 @@ class ProgrammerController extends BaseController
             throw new NotFoundHttpException('Programmer ' . $nickname . ' not found in database.');
         }
 
-        $json = $this->serialize($programmer);
-
-        return new Response($json, 200);
+        return $this->createApiResponse($programmer, 200);
     }
 
     /**
@@ -112,10 +107,7 @@ class ProgrammerController extends BaseController
             throw new Exception('Error saving programmer resource: ' . $e->getMessage());
         }
 
-
-        return new Response(
-            $this->serialize($programmer),
-            200,
+        return $this->createApiResponse($programmer, 200,
             ['Location' => $request->getRequestUri()]
         );
     }
@@ -137,18 +129,6 @@ class ProgrammerController extends BaseController
 
         return new Response(null, 204);
 
-    }
-
-    /**
-     * @param $data
-     * @return array
-     */
-    private function serialize($data)
-    {
-        /** @var Serializer $serializer */
-        $serializer = $this->container['serializer'];
-
-        return $serializer->serialize($data, 'json');
     }
 
     /**

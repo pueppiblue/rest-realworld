@@ -2,6 +2,7 @@
 
 namespace KnpU\CodeBattle\Controller;
 
+use JMS\Serializer\Serializer;
 use KnpU\CodeBattle\Model\Programmer;
 use KnpU\CodeBattle\Model\User;
 use KnpU\CodeBattle\Repository\UserRepository;
@@ -10,6 +11,7 @@ use Silex\Application as SilexApplication;
 use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,7 +73,7 @@ abstract class BaseController implements ControllerProviderInterface
     public function getLoggedInUser()
     {
         if (!$this->isUserLoggedIn()) {
-            return;
+            return null;
         }
 
         return $this->container['security']->getToken()->getUser();
@@ -228,4 +230,32 @@ abstract class BaseController implements ControllerProviderInterface
         return $this->container['repository.api_token'];
     }
 
+    /**
+     * @param $data
+     * @return array
+     */
+    private function serialize($data)
+    {
+        /** @var Serializer $serializer */
+        $serializer = $this->container['serializer'];
+
+        return $serializer->serialize($data, 'json');
+    }
+
+    /**
+     * @param $data
+     * @param int $statusCode
+     * @param array $headers
+     * @return Response
+     */
+    protected function createApiResponse($data, $statusCode = 200, $headers = []) {
+
+        $json = $this->serialize($data);
+
+        $headers = array_merge($headers, [
+            'Content-Type' => 'application/json',
+        ]);
+
+        return new Response($json, $statusCode, $headers);
+    }
 }
