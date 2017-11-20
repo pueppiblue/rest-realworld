@@ -3,6 +3,7 @@
 namespace KnpU\CodeBattle;
 
 use Doctrine\Common\Annotations\AnnotationReader;
+use KnpU\CodeBattle\Api\ApiProblem;
 use KnpU\CodeBattle\Api\ApiProblemException;
 use KnpU\CodeBattle\Battle\PowerManager;
 use KnpU\CodeBattle\Repository\BattleRepository;
@@ -21,6 +22,7 @@ use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Component\Finder\Finder;
 use KnpU\CodeBattle\DataFixtures\FixturesManager;
@@ -56,9 +58,8 @@ class Application extends SilexApplication
     {
         $controllerPath = 'src/KnpU/CodeBattle/Controller';
         $finder = new Finder();
-        $finder->in($this['root_dir'].'/'.$controllerPath)
-            ->name('*Controller.php')
-        ;
+        $finder->in($this['root_dir'] . '/' . $controllerPath)
+            ->name('*Controller.php');
 
         foreach ($finder as $file) {
             /** @var \Symfony\Component\Finder\SplFileInfo $file */
@@ -69,7 +70,7 @@ class Application extends SilexApplication
             // e.g. Api\FooController
             $cleanedPathName = str_replace('.php', '', $cleanedPathName);
 
-            $class = 'KnpU\\CodeBattle\\Controller\\'.$cleanedPathName;
+            $class = 'KnpU\\CodeBattle\\Controller\\' . $cleanedPathName;
 
             // don't instantiate the abstract base class
             $refl = new \ReflectionClass($class);
@@ -88,9 +89,9 @@ class Application extends SilexApplication
 
         // Twig
         $this->register(new TwigServiceProvider(), array(
-            'twig.path' => $this['root_dir'].'/views',
+            'twig.path' => $this['root_dir'] . '/views',
         ));
-        $app['twig'] = $this->share($this->extend('twig', function(\Twig_Environment $twig, $app) {
+        $app['twig'] = $this->share($this->extend('twig', function (\Twig_Environment $twig, $app) {
             $twig->addExtension($app['twig.battle_extension']);
 
             return $twig;
@@ -102,20 +103,20 @@ class Application extends SilexApplication
         // Doctrine DBAL
         $this->register(new DoctrineServiceProvider(), array(
             'db.options' => array(
-                'driver'   => 'pdo_sqlite',
-                'path'     => $this['sqlite_path']
+                'driver' => 'pdo_sqlite',
+                'path' => $this['sqlite_path']
             ),
         ));
 
         // Monolog
         $this->register(new MonologServiceProvider(), array(
-            'monolog.logfile' => $this['root_dir'].'/logs/development.log',
+            'monolog.logfile' => $this['root_dir'] . '/logs/development.log',
         ));
 
         // Validation
         $this->register(new ValidatorServiceProvider());
         // configure validation to load from a YAML file
-        $this['validator.mapping.class_metadata_factory'] = $this->share(function() {
+        $this['validator.mapping.class_metadata_factory'] = $this->share(function () {
             return new ClassMetadataFactory(
                 new AnnotationLoader($this['annotation_reader'])
             );
@@ -125,11 +126,11 @@ class Application extends SilexApplication
         $this->register(new TranslationServiceProvider(), array(
             'locale_fallbacks' => array('en'),
         ));
-        $this['translator'] = $this->share($this->extend('translator', function($translator) {
+        $this['translator'] = $this->share($this->extend('translator', function ($translator) {
             /** @var \Symfony\Component\Translation\Translator $translator */
             $translator->addLoader('yaml', new YamlFileLoader());
 
-            $translator->addResource('yaml', $this['root_dir'].'/translations/en.yml', 'en');
+            $translator->addResource('yaml', $this['root_dir'] . '/translations/en.yml', 'en');
 
             return $translator;
         }));
@@ -137,33 +138,33 @@ class Application extends SilexApplication
 
     private function configureParameters()
     {
-        $this['root_dir'] = __DIR__.'/../../..';
-        $this['sqlite_path'] = $this['root_dir'].'/data/code_battles.sqlite';
+        $this['root_dir'] = __DIR__ . '/../../..';
+        $this['sqlite_path'] = $this['root_dir'] . '/data/code_battles.sqlite';
     }
 
     private function configureServices()
     {
         $app = $this;
 
-        $this['repository.user'] = $this->share(function() use ($app) {
+        $this['repository.user'] = $this->share(function () use ($app) {
             $repo = new UserRepository($app['db'], $app['repository_container']);
             $repo->setEncoderFactory($app['security.encoder_factory']);
 
             return $repo;
         });
-        $this['repository.programmer'] = $this->share(function() use ($app) {
+        $this['repository.programmer'] = $this->share(function () use ($app) {
             return new ProgrammerRepository($app['db'], $app['repository_container']);
         });
-        $this['repository.project'] = $this->share(function() use ($app) {
+        $this['repository.project'] = $this->share(function () use ($app) {
             return new ProjectRepository($app['db'], $app['repository_container']);
         });
-        $this['repository.battle'] = $this->share(function() use ($app) {
+        $this['repository.battle'] = $this->share(function () use ($app) {
             return new BattleRepository($app['db'], $app['repository_container']);
         });
-        $this['repository.api_token'] = $this->share(function() use ($app) {
+        $this['repository.api_token'] = $this->share(function () use ($app) {
             return new ApiTokenRepository($app['db'], $app['repository_container']);
         });
-        $this['repository_container'] = $this->share(function() use ($app) {
+        $this['repository_container'] = $this->share(function () use ($app) {
             return new RepositoryContainer($app, array(
                 'user' => 'repository.user',
                 'programmer' => 'repository.programmer',
@@ -173,13 +174,13 @@ class Application extends SilexApplication
             ));
         });
 
-        $this['battle.battle_manager'] = $this->share(function() use ($app) {
+        $this['battle.battle_manager'] = $this->share(function () use ($app) {
             return new BattleManager(
                 $app['repository.battle'],
                 $app['repository.programmer']
             );
         });
-        $this['battle.power_manager'] = $this->share(function() use ($app) {
+        $this['battle.power_manager'] = $this->share(function () use ($app) {
             return new PowerManager(
                 $app['repository.programmer']
             );
@@ -189,7 +190,7 @@ class Application extends SilexApplication
             return new FixturesManager($app);
         });
 
-        $this['twig.battle_extension'] = $this->share(function() use ($app) {
+        $this['twig.battle_extension'] = $this->share(function () use ($app) {
             return new BattleExtension(
                 $app['request_stack'],
                 $app['repository.programmer'],
@@ -197,14 +198,14 @@ class Application extends SilexApplication
             );
         });
 
-        $this['annotation_reader'] = $this->share(function() {
+        $this['annotation_reader'] = $this->share(function () {
             return new AnnotationReader();
         });
         // you could use a cache with annotations if you want
         //$this['annotations.cache'] = new PhpFileCache($this['root_dir'].'/cache');
         //$this['annotation_reader'] = new CachedReader($this['annotations_reader'], $this['annotations.cache'], $this['debug']);
 
-        $this['api.validator'] = $this->share(function() use ($app) {
+        $this['api.validator'] = $this->share(function () use ($app) {
             return new ApiValidator($app['validator']);
         });
     }
@@ -250,35 +251,35 @@ class Application extends SilexApplication
         $app['security.authentication_listener.factory.api_token'] = $app->protect(function ($name, $options) use ($app) {
 
             // the class that reads the token string off of the Authorization header
-            $app['security.authentication_listener.'.$name.'.api_token'] = $app->share(function () use ($app) {
+            $app['security.authentication_listener.' . $name . '.api_token'] = $app->share(function () use ($app) {
                 return new ApiTokenListener($app['security'], $app['security.authentication_manager']);
             });
 
             // the class that looks up the ApiToken object in the database for the given token string
             // and authenticates the user if it's found
-            $app['security.authentication_provider.'.$name.'.api_token'] = $app->share(function () use ($app) {
+            $app['security.authentication_provider.' . $name . '.api_token'] = $app->share(function () use ($app) {
                 return new ApiTokenProvider($app['repository.user'], $app['repository.api_token']);
             });
 
             // the class that decides what should happen if no authentication credentials are passed
-            $this['security.entry_point.'.$name.'.api_token'] = $app->share(function() use ($app) {
+            $this['security.entry_point.' . $name . '.api_token'] = $app->share(function () use ($app) {
                 return new ApiEntryPoint($app['translator']);
             });
 
             return array(
                 // the authentication provider id
-                'security.authentication_provider.'.$name.'.api_token',
+                'security.authentication_provider.' . $name . '.api_token',
                 // the authentication listener id
-                'security.authentication_listener.'.$name.'.api_token',
+                'security.authentication_listener.' . $name . '.api_token',
                 // the entry point id
-                'security.entry_point.'.$name.'.api_token',
+                'security.entry_point.' . $name . '.api_token',
                 // the position of the listener in the stack
                 'pre_auth'
             );
         });
 
         // expose a fake "user" service
-        $this['user'] = $this->share(function() use ($app) {
+        $this['user'] = $this->share(function () use ($app) {
             $user = $app['security']->getToken()->getUser();
 
             return is_object($user) ? $user : null;
@@ -287,12 +288,24 @@ class Application extends SilexApplication
 
     private function configureListeners()
     {
-        $this->error(function(\Exception $e, $statusCode) {
-           if (! $e instanceof ApiProblemException) {
-               return null;
-           }
 
-           return $e->getApiProblem()->createApiProblemResponse();
+        $app = $this;
+
+        $this->error(function (\Exception $e, $statusCode) use ($app) {
+            /** @var Request $request */
+            $request = $app['request'];
+            // path must start with /api
+            if (strpos($request->getPathInfo(), '/api') !== 0) {
+                return null;
+            }
+
+            if ($e instanceof ApiProblemException) {
+                $apiProblem =  $e->getApiProblem();
+            } else {
+                $apiProblem = new ApiProblem($statusCode);
+            }
+
+            return $apiProblem->createApiProblemResponse();
 
         });
     }
