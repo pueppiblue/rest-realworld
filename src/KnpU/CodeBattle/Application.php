@@ -300,6 +300,10 @@ class Application extends SilexApplication
                 return null;
             }
 
+            if (($statusCode === 500) && $app['debug']) {
+                return null;
+            }
+
             if ($e instanceof ApiProblemException) {
                 $apiProblem = $e->getApiProblem();
             } else {
