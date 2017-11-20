@@ -116,6 +116,17 @@ class ProjectContext extends BehatContext
         self::$app = require __DIR__ . '/../../app/bootstrap.php';
     }
 
+    /**
+     * @AfterSuite
+     */
+    public static function reloadFixtures()
+    {
+        /** @var \KnpU\CodeBattle\DataFixtures\FixturesManager $fixtures */
+        $fixtures = self::$app['fixtures_manager'];
+        $fixtures->clearTables();
+        $fixtures->populateData();
+    }
+
     public function getService($name)
     {
         return self::$app[$name];
