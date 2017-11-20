@@ -305,7 +305,9 @@ class Application extends SilexApplication
                 $apiProblem = new ApiProblem($statusCode);
             }
 
-            return $apiProblem->createApiProblemResponse();
+            return $apiProblem->createApiProblemResponse(
+                $request->getHost().'/docs/errors#'
+            );
 
         });
     }

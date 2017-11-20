@@ -51,12 +51,18 @@ class ApiProblem
     }
 
     /**
+     * @param string $urlPrefix
      * @return JsonResponse
      */
-    public function createApiProblemResponse(): JsonResponse
+    public function createApiProblemResponse(string $urlPrefix = null): JsonResponse
     {
+        $data = $this->toArray();
+        if ($data['type'] !== 'about:blank') {
+            $data['type'] = $urlPrefix . $data['type'];
+        }
+
         return new JsonResponse(
-            $this->toArray(),
+            $data,
             $this->getStatusCode(),
             ['Content-Type' => 'application/problem+json']
         );
@@ -121,6 +127,14 @@ class ApiProblem
     public function getTitle(): string
     {
         return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
     }
 
 
