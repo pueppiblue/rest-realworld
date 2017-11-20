@@ -21,12 +21,12 @@ Feature: Programmer
     And the "Location" header should be "/api/programmers/GeekDev"
     And the "nickname" property should equal "GeekDev"
 
-  Scenario: Validation error on CREATE without a nickname property on Requiest Entity
+  Scenario: Validation error on CREATE without a nickname property on Request Entity
     Given I have the payload:
       """
         {
-          "avatarNumber": "2",
-          "tagLine": "I am in for a test!"
+          "tagLine": "I am in for a test!",
+          "avatarNumber": "2"
         }
       """
     When I request "POST /api/programmers"
@@ -63,6 +63,13 @@ Feature: Programmer
       tagLine
       """
     And the "nickname" property should equal "UnitTester"
+
+  Scenario: GET non-existent programmer results in JSON 404 Response
+    When I request "GET /api/programmers/non-existent-programmer"
+    Then the response status code should be 404
+    And the "Content-Type" header should be "application/problem+json"
+    And the "type" property should equal "about:blank"
+    And the "title" property should equal "Not Found"
 
   Scenario: GET a collection of programmers
     Given the following programmers exist:
