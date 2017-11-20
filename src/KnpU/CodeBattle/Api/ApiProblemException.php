@@ -17,7 +17,11 @@ class ApiProblemException extends HttpException
             $apiProblem->getStatusCode(),
             $apiProblem->getTitle(),
             $previous, $headers, $code);
+
         $this->apiProblem = $apiProblem;
+        if ($previous instanceof HttpException) {
+            $this->apiProblem->setDetail($previous->getMessage());
+        }
     }
 
     /**

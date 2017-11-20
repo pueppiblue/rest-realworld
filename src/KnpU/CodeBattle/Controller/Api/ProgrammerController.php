@@ -81,7 +81,7 @@ class ProgrammerController extends BaseController
         $programmer = $this->getProgrammerRepository()->findOneByNickname($nickname);
 
         if (!$programmer) {
-            throw new NotFoundHttpException('Programmer ' . $nickname . ' not found in api database.');
+            throw new NotFoundHttpException('Programmer ' . $nickname . ' not found in database.');
         }
 
         $data = $this->serializeProgrammer($programmer);

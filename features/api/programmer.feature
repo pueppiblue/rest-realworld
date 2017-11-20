@@ -70,6 +70,7 @@ Feature: Programmer
     And the "Content-Type" header should be "application/problem+json"
     And the "type" property should equal "about:blank"
     And the "title" property should equal "Not Found"
+    And the "detail" property should contain "not found in database"
 
   Scenario: GET a collection of programmers
     Given the following programmers exist:

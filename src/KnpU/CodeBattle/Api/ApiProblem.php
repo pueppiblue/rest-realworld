@@ -29,6 +29,8 @@ class ApiProblem
      */
     private $title;
 
+    private $detail;
+
     private $extraData = [];
 
     /**
@@ -94,6 +96,10 @@ class ApiProblem
         $this->extraData[$key] = $value;
     }
 
+    /**
+     * Use this to append data to a JSON Response
+     * @return array
+     */
     public function toArray()
     {
         return array_merge(
@@ -102,6 +108,7 @@ class ApiProblem
                 'statusCode' => $this->getStatusCode(),
                 'type' => $this->type,
                 'title' => $this->title,
+                'detail' => $this->detail,
             ]
         );
     }
@@ -135,6 +142,14 @@ class ApiProblem
     public function getType(): string
     {
         return $this->type;
+    }
+
+    /**
+     * @param string $detail
+     */
+    public function setDetail(string $detail)
+    {
+        $this->detail = $detail;
     }
 
 
