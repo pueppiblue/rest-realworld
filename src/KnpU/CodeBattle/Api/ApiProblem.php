@@ -3,6 +3,7 @@
 namespace KnpU\CodeBattle\Api;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class ApiProblem
 {
@@ -36,11 +37,17 @@ class ApiProblem
      * @param int $statusCode
      * @throws \Exception
      */
-    public function __construct(int $statusCode, string $type)
+    public function __construct(int $statusCode, string $type = null)
     {
-        $this->type = $type;
         $this->statusCode = $statusCode;
-        $this->setTitle($type);
+
+        if ($type === null) {
+            $this->type = 'about:blank';
+            $this->title = Response::$statusTexts[$statusCode] ?? 'Unknown status code.';
+        } else {
+            $this->type = $type;
+            $this->setTitle($type);
+        }
     }
 
     /**
@@ -51,7 +58,7 @@ class ApiProblem
         return new JsonResponse(
             $this->toArray(),
             $this->getStatusCode(),
-            ['Content-Type' =>'application/problem+json']
+            ['Content-Type' => 'application/problem+json']
         );
     }
 
@@ -115,8 +122,6 @@ class ApiProblem
     {
         return $this->title;
     }
-
-
 
 
 }
