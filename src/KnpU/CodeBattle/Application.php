@@ -309,6 +309,7 @@ class Application extends SilexApplication
                 return null;
             }
 
+            // allow 500 errors to be thrown in Debug mode
             if (($statusCode === 500) && $app['debug']) {
                 return null;
             }
@@ -318,6 +319,13 @@ class Application extends SilexApplication
             } else {
                 $apiProblem = new ApiProblem($statusCode);
 
+                /*
+                 * If it's an HttpException (e.g. 404)
+                 * we state as a rule that the exception message is safe
+                 * to be seen by the client. Otherwise in a low-level exception
+                 * there could be some sensitive information in the message, that
+                 * should not be exposed.
+                 */
                 if ($e instanceof HttpException) {
                     $apiProblem->setDetail($e->getMessage());
                 }

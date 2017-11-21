@@ -11,6 +11,7 @@ use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
 class ProgrammerController extends BaseController
 {
@@ -30,10 +31,15 @@ class ProgrammerController extends BaseController
     /**
      * @param Request $request
      * @return string|Response
+     * @throws \Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException
      * @throws Exception
      */
     public function newAction(Request $request)
     {
+        if (!$this->getLoggedInUser()) {
+            throw new AuthenticationCredentialsNotFoundException("Authentication Required!");
+        }
+
         $programmer = new Programmer();
 
         $this->handleRequest($request, $programmer);
