@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\Request;
 use KnpU\CodeBattle\Repository\ProgrammerRepository;
 use KnpU\CodeBattle\Repository\ProjectRepository;
 use KnpU\CodeBattle\Security\Token\ApiTokenRepository;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
 /**
  * Base controller class to hide Silex-related implementation details
@@ -261,5 +263,32 @@ abstract class BaseController implements ControllerProviderInterface
         ]);
 
         return new Response($json, $statusCode, $headers);
+    }
+
+    /**
+     * Enforces that the user is logged in at all.
+     *
+     * @throws \Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException
+     */
+    protected function enforceUserSecurity() {
+        if (!$this->getLoggedInUser()) {
+            throw new AuthenticationCredentialsNotFoundException('Authentication Required!');
+        }
+    }
+
+    /**
+     * Checks if current authenticated user is Owner of the programmer
+     * he wants to make changes to.
+     *
+     * @param Programmer $programmer
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     */
+    protected function enforceProgrammerOwnerShipSecurity(Programmer $programmer) {
+
+        $this->enforceUserSecurity();
+
+        if (!$programmer->userId === $this->getLoggedInUser()->id) {
+            throw new AccessDeniedException('You are not the owner of this programmer.');
+        }
     }
 }

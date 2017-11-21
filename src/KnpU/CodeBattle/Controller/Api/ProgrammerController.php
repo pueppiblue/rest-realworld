@@ -36,9 +36,7 @@ class ProgrammerController extends BaseController
      */
     public function newAction(Request $request)
     {
-        if (!$this->getLoggedInUser()) {
-            throw new AuthenticationCredentialsNotFoundException("Authentication Required!");
-        }
+        $this->enforceUserSecurity();
 
         $programmer = new Programmer();
 
@@ -100,6 +98,8 @@ class ProgrammerController extends BaseController
             throw new NotFoundHttpException('Programmer ' . $nickname . ' not found in api database.');
         }
 
+        $this->enforceProgrammerOwnerShipSecurity($programmer);
+
         $this->handleRequest($request, $programmer);
 
         $errors = $this->validate($programmer);
@@ -127,6 +127,8 @@ class ProgrammerController extends BaseController
     public function deleteAction($nickname)
     {
         $programmer = $this->getProgrammerRepository()->findOneByNickname($nickname);
+        $this->enforceProgrammerOwnerShipSecurity($programmer);
+
         try {
             $this->delete($programmer);
         } catch (Exception $e) {
