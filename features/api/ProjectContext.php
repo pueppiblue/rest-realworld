@@ -45,7 +45,11 @@ class ProjectContext extends BehatContext
             $nickname = $row['nickname'];
             unset($row['nickname']);
 
-            $this->createProgrammer($nickname, null, $row);
+            $ownerName = $row['owner'] ?? null;
+            unset($row['owner']);
+            $owner = $this->getUserRepository()->findUserByUsername($ownerName);
+
+            $this->createProgrammer($nickname, $owner, $row);
         }
     }
 
@@ -73,6 +77,7 @@ class ProjectContext extends BehatContext
 
         $this->getApiTokenRepository()->save($token);
     }
+
 
     /**
      * @Given /^there is a project called "([^"]*)"$/

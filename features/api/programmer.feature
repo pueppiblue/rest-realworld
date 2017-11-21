@@ -6,7 +6,9 @@ Feature: Programmer
   Background:
     # actually does create the user in the database
     Given the user "weaverryan" exists
+    And the user "pueppiblue" exists
     And "weaverryan" has an authentication token "ABC123"
+    And "pueppiblue" has an authentication token "XYZ789"
     And I set the "Authorization" header to be "token ABC123"
 
   Scenario: Create a programmer
