@@ -36,9 +36,8 @@ class ApiEntryPoint implements AuthenticationEntryPointInterface
     {
         $message = $this->getMessage($authException);
 
-        $response = new JsonResponse(array('detail' => $message), 401);
+        return new JsonResponse(array('detail' => $message), 401);
 
-        return $response;
     }
 
     /**
@@ -48,9 +47,7 @@ class ApiEntryPoint implements AuthenticationEntryPointInterface
      */
     private function getMessage(AuthenticationException $authException = null)
     {
-        $key = $authException ? $authException->getMessageKey() : 'authentication_required';
-        $parameters = $authException ? $authException->getMessageData() : array();
-
-        return $this->translator->trans($key, $parameters);
+        $message = $authException ? $authException->getMessage() : 'authentication_required';
+        return $this->translator->trans($message);
     }
 }
