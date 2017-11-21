@@ -171,10 +171,10 @@ class ProgrammerController extends BaseController
                 continue;
             }
             if (property_exists($programmer, $property)) {
-                $programmer->$property = isset($data[$property]) ? $data[$property] : null;
+                $programmer->$property = $data[$property] ?? null;
             }
         }
-        $programmer->userId = $this->findUserByUsername('weaverryan')->id;
+        $programmer->userId = $this->getLoggedInUser()->id; //container['security.token_storage']->getToken()->getUser
     }
 
     /**
