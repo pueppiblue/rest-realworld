@@ -65,7 +65,7 @@ abstract class BaseController implements ControllerProviderInterface
      */
     public function isUserLoggedIn()
     {
-        return $this->container['security']->isGranted('IS_AUTHENTICATED_FULLY');
+        return $this->container['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY');
     }
 
     /**
@@ -77,7 +77,7 @@ abstract class BaseController implements ControllerProviderInterface
             return null;
         }
 
-        return $this->container['security']->getToken()->getUser();
+        return $this->container['security.token_storage']->getToken()->getUser();
     }
 
     /**

@@ -262,7 +262,7 @@ class Application extends SilexApplication
 
             // the class that reads the token string off of the Authorization header
             $app['security.authentication_listener.' . $name . '.api_token'] = self::share(function () use ($app) {
-                return new ApiTokenListener($app['security'], $app['security.authentication_manager']);
+                return new ApiTokenListener($app['security.token_storage'], $app['security.authentication_manager']);
             });
 
             // the class that looks up the ApiToken object in the database for the given token string
