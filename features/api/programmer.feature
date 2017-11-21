@@ -4,8 +4,10 @@ Feature: Programmer
   I need to be able to create programmers and power them up
 
   Background:
-     # actually does create the user
-     Given the user "weaverryan" exists
+    # actually does create the user in the database
+    Given the user "weaverryan" exists
+    And "weaverryan" has an authentication token "ABC123"
+    And I set the "Authorization" header to be "token ABC123"
 
   Scenario: Create a programmer
     Given I have the payload:
