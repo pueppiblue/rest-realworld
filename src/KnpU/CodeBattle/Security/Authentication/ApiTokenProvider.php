@@ -42,7 +42,7 @@ class ApiTokenProvider implements AuthenticationProviderInterface
         $apiToken = $this->apiTokenRepository->findOneByToken($tokenString);
 
         if (!$apiToken) {
-            throw new BadCredentialsException('Invalid token');
+            throw new BadCredentialsException('Invalid Credentials!');
         }
 
         // look up the user based on the ApiToken.userId value

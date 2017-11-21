@@ -15,10 +15,16 @@ Feature: Authentication
     Then the response status code should be 401
     And the "detail" property should contain "Authentication Required"
 
+  Scenario: Sending an invalid token results in a 401
+    Given I set the "Authorization" header to be "token ABCFAKETOKEN"
+    When I request "POST /api/programmers"
+    Then the response status code should be 401
+    And the "detail" property should contain "Invalid Credentials!"
+
   Scenario: Update|DELETE a programmer without being authenticated
     Given the following programmers exist:
-      | nickname    | avatarNumber  |
-      | UnitTester  | 3             |
+      | nickname   | avatarNumber |
+      | UnitTester | 3            |
     When I request "PUT /api/programmers/UnitTester"
     Then the response status code should be 401
     And the "detail" property should contain "Authentication Required"
@@ -30,8 +36,8 @@ Feature: Authentication
 
   Scenario: Update|DELETE a programmer i do not own
     Given the following programmers exist:
-      | nickname    | avatarNumber  | owner         |
-      | UnitTester  | 3             | weaverryan    |
+      | nickname   | avatarNumber | owner      |
+      | UnitTester | 3            | weaverryan |
     And I set the "Authorization" header to be "token XYZ789"
     When I request "PUT /api/programmers/UnitTester"
     Then the response status code should be 403

@@ -287,7 +287,7 @@ abstract class BaseController implements ControllerProviderInterface
 
         $this->enforceUserSecurity();
 
-        if (!$programmer->userId === $this->getLoggedInUser()->id) {
+        if ($programmer->userId !== $this->getLoggedInUser()->id) {
             throw new AccessDeniedException('You are not the owner of this programmer.');
         }
     }
