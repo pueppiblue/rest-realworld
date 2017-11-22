@@ -7,10 +7,14 @@ use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
 use JMS\Serializer\SerializerBuilder;
 use KnpU\CodeBattle\Api\ApiProblem;
 use KnpU\CodeBattle\Api\ApiProblemException;
+use KnpU\CodeBattle\Battle\BattleManager;
 use KnpU\CodeBattle\Battle\PowerManager;
+use KnpU\CodeBattle\DataFixtures\FixturesManager;
 use KnpU\CodeBattle\Repository\BattleRepository;
+use KnpU\CodeBattle\Repository\ProgrammerRepository;
 use KnpU\CodeBattle\Repository\ProjectRepository;
 use KnpU\CodeBattle\Repository\RepositoryContainer;
+use KnpU\CodeBattle\Repository\UserRepository;
 use KnpU\CodeBattle\Security\Authentication\ApiEntryPoint;
 use KnpU\CodeBattle\Security\Authentication\ApiTokenListener;
 use KnpU\CodeBattle\Security\Authentication\ApiTokenProvider;
@@ -18,22 +22,18 @@ use KnpU\CodeBattle\Security\Token\ApiTokenRepository;
 use KnpU\CodeBattle\Twig\BattleExtension;
 use KnpU\CodeBattle\Validator\ApiValidator;
 use Silex\Application as SilexApplication;
-use Silex\Provider\SessionServiceProvider;
-use Silex\Provider\UrlGeneratorServiceProvider;
-use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\SecurityServiceProvider;
+use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
+use Silex\Provider\TwigServiceProvider;
+use Silex\Provider\UrlGeneratorServiceProvider;
+use Silex\Provider\ValidatorServiceProvider;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
-use Symfony\Component\Finder\Finder;
-use KnpU\CodeBattle\DataFixtures\FixturesManager;
-use Silex\Provider\SecurityServiceProvider;
-use KnpU\CodeBattle\Repository\UserRepository;
-use KnpU\CodeBattle\Repository\ProgrammerRepository;
-use KnpU\CodeBattle\Battle\BattleManager;
-use Silex\Provider\ValidatorServiceProvider;
 use Symfony\Component\Validator\Mapping\ClassMetadataFactory;
 use Symfony\Component\Validator\Mapping\Loader\AnnotationLoader;
 
@@ -232,6 +232,7 @@ class Application extends SilexApplication
                         return $app['repository.user'];
                     }),
                     'stateless' => true,
+                    'http' => true,
                     'anonymous' => true,
                     'api_token' => true,
                 ),

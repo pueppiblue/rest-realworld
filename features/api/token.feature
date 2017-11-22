@@ -21,3 +21,14 @@ Feature: Token
     Then the response status code should be 201
     And the "Location" header should exist
     And the "token" property should be a string
+
+  Scenario: Create a token with wrong credentials
+    Given I authenticate with user "weaverryan" and password "wrong_password"
+    And I have the payload:
+    """
+      {
+        "notes": "This is a testing token!"
+      }
+    """
+    When I request "POST /api/tokens"
+    Then the response status code should be 401

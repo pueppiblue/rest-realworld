@@ -20,16 +20,15 @@ class TokenController extends BaseController
 
     /**
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\Response|null
      * @throws \KnpU\CodeBattle\Api\ApiProblemException
      * @throws \Exception
      */
     public function newAction(Request $request)
     {
-        $username = $request->getUser();
-        $user = $this->getUserRepository()->findUserByUsername($username);
+        $this->enforceUserSecurity();
 
-        $token = new ApiToken($user->id);
+        $token = new ApiToken($this->getLoggedInUser()->id);
         $data = json_decode($request->getContent(), true);
         $token->notes = $data['notes'];
 
