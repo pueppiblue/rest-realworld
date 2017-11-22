@@ -52,14 +52,14 @@ class ApiProblem
     }
 
     /**
-     * @param string $urlPrefix
+     * @param string $urlPrefix the URI where your API errors are documented.
      * @return JsonResponse
      */
     public function createApiProblemResponse(string $urlPrefix = null): JsonResponse
     {
         $data = $this->toArray();
         if ($data['type'] !== 'about:blank') {
-            $data['type'] = $urlPrefix . $data['type'];
+            $data['type'] = ($urlPrefix ?? 'http://localhost:8000/docs/errors#') . $data['type'];
         }
 
         return new JsonResponse(
