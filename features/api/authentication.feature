@@ -14,12 +14,14 @@ Feature: Authentication
     When I request "POST /api/programmers"
     Then the response status code should be 401
     And the "detail" property should contain "Authentication Required"
+    And the "Content-Type" header should be "application/problem+json"
 
   Scenario: Sending an invalid token results in a 401
     Given I set the "Authorization" header to be "token ABCFAKETOKEN"
     When I request "POST /api/programmers"
     Then the response status code should be 401
     And the "detail" property should contain "Invalid Credentials!"
+    And the "Content-Type" header should be "application/problem+json"
 
   Scenario: Update|DELETE a programmer without being authenticated
     Given the following programmers exist:
@@ -33,6 +35,7 @@ Feature: Authentication
     And the "detail" property should contain "Authentication Required"
     Then the response status code should be 401
     And the "detail" property should contain "Authentication Required"
+    And the "Content-Type" header should be "application/problem+json"
 
   Scenario: Update|DELETE a programmer i do not own
     Given the following programmers exist:
@@ -47,3 +50,4 @@ Feature: Authentication
     And the "detail" property should contain "not the owner of this programmer"
     Then the response status code should be 403
     And the "detail" property should contain "not the owner of this programmer"
+    And the "Content-Type" header should be "application/problem+json"
