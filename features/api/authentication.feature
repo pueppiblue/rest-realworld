@@ -30,9 +30,8 @@ Feature: Authentication
     When I request "PUT /api/programmers/UnitTester"
     Then the response status code should be 401
     And the "detail" property should contain "Authentication Required"
+    And the "Content-Type" header should be "application/problem+json"
     When I request "PATCH /api/programmers/UnitTester"
-    Then the response status code should be 401
-    And the "detail" property should contain "Authentication Required"
     Then the response status code should be 401
     And the "detail" property should contain "Authentication Required"
     And the "Content-Type" header should be "application/problem+json"
@@ -45,9 +44,8 @@ Feature: Authentication
     When I request "PUT /api/programmers/UnitTester"
     Then the response status code should be 403
     And the "detail" property should contain "not the owner of this programmer"
+    And the "Content-Type" header should be "application/problem+json"
     When I request "PATCH /api/programmers/UnitTester"
-    Then the response status code should be 403
-    And the "detail" property should contain "not the owner of this programmer"
     Then the response status code should be 403
     And the "detail" property should contain "not the owner of this programmer"
     And the "Content-Type" header should be "application/problem+json"
