@@ -9,14 +9,13 @@ class ApiProblem
 {
     const TYPE_VALIDATION_ERROR = 'validation_error';
     const TYPE_INVALID_REQUEST_BODY_FORMAT = 'invalid_body_format';
-    /**
-     * @var string
-     */
+    const TYPE_AUTHENTICATION_ERROR = 'authentication_error';
 
     /**@var array $titles */
     private static $titles = [
         self::TYPE_VALIDATION_ERROR => 'Validation error occurred.',
         self::TYPE_INVALID_REQUEST_BODY_FORMAT => 'Invalid JSON in the request body.',
+        self::TYPE_AUTHENTICATION_ERROR => 'Invalid Credentials',
     ];
 
     private $type;
