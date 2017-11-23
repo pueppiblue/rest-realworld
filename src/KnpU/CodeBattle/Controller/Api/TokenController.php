@@ -30,7 +30,7 @@ class TokenController extends BaseController
 
         $token = new ApiToken($this->getLoggedInUser()->id);
         $data = $this->decodeRequestBodyIntoParameters($request);
-        $token->notes = $data['notes'];
+        $token->notes = $data->get('notes', 'default notes');
 
         try {
             $this->getApiTokenRepository()->save($token);

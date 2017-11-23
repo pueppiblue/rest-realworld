@@ -97,7 +97,7 @@ class ProgrammerController extends BaseController
             throw new NotFoundHttpException('Programmer ' . $nickname . ' not found in api database.');
         }
 
-        $this->enforceProgrammerOwnerShipSecurity($programmer);
+        $this->enforceProgrammerOwnershipSecurity($programmer);
 
         $this->handleRequest($request, $programmer);
 
@@ -126,7 +126,7 @@ class ProgrammerController extends BaseController
     public function deleteAction($nickname)
     {
         $programmer = $this->getProgrammerRepository()->findOneByNickname($nickname);
-        $this->enforceProgrammerOwnerShipSecurity($programmer);
+        $this->enforceProgrammerOwnershipSecurity($programmer);
 
         try {
             $this->delete($programmer);
@@ -146,8 +146,8 @@ class ProgrammerController extends BaseController
      */
     private function handleRequest(Request $request, Programmer $programmer)
     {
-
         $data = $this->decodeRequestBodyIntoParameters($request);
+
         $isNew = ($programmer->id === null);
 
         // define properties managed by the api
@@ -157,11 +157,13 @@ class ProgrammerController extends BaseController
         }
 
         foreach ($apiProperties as $property) {
-            if (!isset($data[$property]) && $request->isMethod('PATCH')) {
+            // ignore unset properties with PATCH
+            // set unset properties to null with PUT
+            if (!$data->get($property) && $request->isMethod('PATCH')) {
                 continue;
             }
             if (property_exists($programmer, $property)) {
-                $programmer->$property = $data[$property] ?? null;
+                $programmer->$property = $data->get($property);
             }
         }
         $programmer->userId = $this->getLoggedInUser()->id; //container['security.token_storage']->getToken()->getUser

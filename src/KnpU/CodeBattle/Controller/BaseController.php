@@ -16,6 +16,7 @@ use KnpU\CodeBattle\Security\Token\ApiTokenRepository;
 use Silex\Application as SilexApplication;
 use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -287,7 +288,7 @@ abstract class BaseController implements ControllerProviderInterface
      * @param Programmer $programmer
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
-    protected function enforceProgrammerOwnerShipSecurity(Programmer $programmer)
+    protected function enforceProgrammerOwnershipSecurity(Programmer $programmer)
     {
 
         $this->enforceUserSecurity();
@@ -301,7 +302,7 @@ abstract class BaseController implements ControllerProviderInterface
      * @param Request $request
      * @param string $bodyFormat expected format of request content
      * @param bool $assoc return associative array or StdClass object
-     * @return array
+     * @return ParameterBag
      * @throws \KnpU\CodeBattle\Api\ApiProblemException
      */
     protected function decodeRequestBodyIntoParameters(Request $request, $bodyFormat = 'json', bool $assoc = true)
@@ -321,6 +322,6 @@ abstract class BaseController implements ControllerProviderInterface
             );
         }
 
-        return $data;
+        return new ParameterBag($data);
     }
 }
