@@ -8,6 +8,7 @@ use KnpU\CodeBattle\Model\Programmer;
 use KnpU\CodeBattle\Model\Project;
 use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BattleController extends BaseController
 {
@@ -60,6 +61,10 @@ class BattleController extends BaseController
     public function showAction(int $battleId)
     {
         $battle = $this->getBattleRepository()->find($battleId);
+
+        if (!$battle) {
+            throw new NotFoundHttpException('No battle found for id: ' . $battleId . '.');
+        }
 
         return $this->createApiResponse($battle);
     }

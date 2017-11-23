@@ -1,12 +1,12 @@
 <?php
 
 use Behat\Behat\Context\BehatContext;
-use KnpU\CodeBattle\Model\User;
-use KnpU\CodeBattle\Model\Programmer;
 use Behat\Gherkin\Node\TableNode;
-use KnpU\CodeBattle\Security\Token\ApiToken;
 use KnpU\CodeBattle\Application;
+use KnpU\CodeBattle\Model\Programmer;
 use KnpU\CodeBattle\Model\Project;
+use KnpU\CodeBattle\Model\User;
+use KnpU\CodeBattle\Security\Token\ApiToken;
 
 /**
  * Sub-context for interacting with our project
@@ -211,4 +211,27 @@ class ProjectContext extends BehatContext
     {
         return self::$app['repository.api_token'];
     }
+
+    /**
+     * @return \KnpU\CodeBattle\Repository\BattleRepository
+     */
+    public function getBattleRepository()
+    {
+        return self::$app['repository.battle'];
+    }
+
+    /**
+     * @Given /^there is no battle with the id "([^"]*)"$/
+     * @param $battleId
+     */
+    public function thereIsNoBattleWithTheId($battleId)
+    {
+        $battle = $this->getBattleRepository()->find($battleId);
+
+        if ($battle) {
+            $this->getBattleRepository()->delete($battle);
+        }
+
+    }
+
 }

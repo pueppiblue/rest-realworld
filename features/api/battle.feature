@@ -55,7 +55,7 @@ Feature: Battle
     And the "type" property should contain "validation_error"
     And the "errors.projectId" property should contain "Invalid or missing projectId"
 
-  Scenario: GETing a single battle"
+  Scenario: GETing a single battle
     Given there is a project called "wookie_dance"
     And there is a programmer called "GeekDev"
     And there has been a battle between "GeekDev" and "wookie_dance"
@@ -67,3 +67,12 @@ Feature: Battle
     didProgrammerWin
     notes
     """
+
+  Scenario: GETing a which does not exists throws a 404
+    Given there is no battle with the id "49"
+    When I request "GET /api/battles/49"
+    Then the response status code should be 404
+    And the "Content-Type" header should be "application/problem+json"
+    And the "title" property should equal "Not Found"
+    And the "type" property should equal "about:blank"
+    And the "detail" property should contain "No battle found for id: 49"
