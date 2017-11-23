@@ -52,10 +52,10 @@ class BattleController extends BaseController
 
         $battle = $battleManager->battle($programmer, $project);
 
-//        $url = $this->generateUrl('user_tokens');
+        $url = $this->generateUrl('api_battles_show', ['battleId' => $battle->id]);
 
         return $this->createApiResponse($battle, 201,
-            ['Location' => '']);
+            ['Location' => $url]);
     }
 
     public function showAction(int $battleId)

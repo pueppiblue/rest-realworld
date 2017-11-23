@@ -20,6 +20,7 @@ Feature: Battle
       """
     When I request "POST /api/battles"
     Then the response status code should be 201
+    And the "Content-Type" header should be "application/json"
     And the "Location" header should exist
     And the "didProgrammerWin" property should exist
 
