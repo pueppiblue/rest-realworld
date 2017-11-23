@@ -32,3 +32,17 @@ Feature: Token
     """
     When I request "POST /api/tokens"
     Then the response status code should be 401
+
+
+  Scenario: Create a token without notes properties
+    Given I authenticate with user "weaverryan" and password "test"
+    And I have the payload:
+    """
+      {
+      }
+    """
+    When I request "POST /api/tokens"
+    Then the response status code should be 422
+    And the "errors.notes" property should contain "Please add some notes about this token"
+    And the "type" property should contain "validation_error"
+    And the "Content-Type" header should be "application/problem+json"

@@ -10,8 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TokenController extends BaseController
 {
-
-
     protected function addRoutes(ControllerCollection $controllers)
     {
         $controllers->post('/api/tokens', [$this, 'newAction'])
@@ -30,7 +28,9 @@ class TokenController extends BaseController
 
         $token = new ApiToken($this->getLoggedInUser()->id);
         $data = $this->decodeRequestBodyIntoParameters($request);
-        $token->notes = $data->get('notes', 'default notes');
+        $token->notes = $data->get('notes');
+
+        $this->validate($token);
 
         try {
             $this->getApiTokenRepository()->save($token);
