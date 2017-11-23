@@ -150,7 +150,7 @@ class ProgrammerController extends BaseController
 
         $isNew = ($programmer->id === null);
 
-        // define properties managed by the api
+        // define which properties should be changeable by an api request
         $apiProperties = ['avatarNumber', 'tagLine'];
         if ($isNew) {
             $apiProperties[] = 'nickname';
@@ -159,7 +159,7 @@ class ProgrammerController extends BaseController
         foreach ($apiProperties as $property) {
             // ignore unset properties with PATCH
             // set unset properties to null with PUT
-            if (!$data->get($property) && $request->isMethod('PATCH')) {
+            if (!$data->has($property) && $request->isMethod('PATCH')) {
                 continue;
             }
             if (property_exists($programmer, $property)) {
