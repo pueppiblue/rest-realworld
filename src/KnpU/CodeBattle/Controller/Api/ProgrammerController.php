@@ -3,8 +3,6 @@
 namespace KnpU\CodeBattle\Controller\Api;
 
 use Exception;
-use KnpU\CodeBattle\Api\ApiProblem;
-use KnpU\CodeBattle\Api\ApiProblemException;
 use KnpU\CodeBattle\Controller\BaseController;
 use KnpU\CodeBattle\Model\Programmer;
 use Silex\ControllerCollection;
@@ -41,10 +39,7 @@ class ProgrammerController extends BaseController
 
         $this->handleRequest($request, $programmer);
 
-        $errors = $this->validate($programmer);
-        if (!empty($errors)) {
-            return $this->handleValidationErrors($errors);
-        }
+        $this->validate($programmer);
 
         try {
             $this->save($programmer);
@@ -101,10 +96,7 @@ class ProgrammerController extends BaseController
 
         $this->handleRequest($request, $programmer);
 
-        $errors = $this->validate($programmer);
-        if (!empty($errors)) {
-            return $this->handleValidationErrors($errors);
-        }
+        $this->validate($programmer);
 
         try {
             $this->save($programmer);
@@ -169,19 +161,5 @@ class ProgrammerController extends BaseController
         $programmer->userId = $this->getLoggedInUser()->id; //container['security.token_storage']->getToken()->getUser
     }
 
-    /**
-     * @param $errors
-     * @throws \KnpU\CodeBattle\Api\ApiProblemException
-     */
-    private function handleValidationErrors($errors)
-    {
-        $apiProblem = new ApiProblem(
-            422,
-            ApiProblem::TYPE_VALIDATION_ERROR
-        );
-        $apiProblem->setExtraData('errors', $errors);
-
-        throw new ApiProblemException($apiProblem);
-    }
 }
 

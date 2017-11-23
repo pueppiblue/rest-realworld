@@ -181,11 +181,28 @@ abstract class BaseController implements ControllerProviderInterface
 
     /**
      * @param $obj
-     * @return array
      */
     public function validate($obj)
     {
-        return $this->container['api.validator']->validate($obj);
+        $errors = $this->container['api.validator']->validate($obj);
+        if (!empty($errors)) {
+            $this->handleValidationErrors($errors);
+        }
+    }
+
+    /**
+     * @param $errors
+     * @throws \KnpU\CodeBattle\Api\ApiProblemException
+     */
+    private function handleValidationErrors($errors)
+    {
+        $apiProblem = new ApiProblem(
+            422,
+            ApiProblem::TYPE_VALIDATION_ERROR
+        );
+        $apiProblem->setExtraData('errors', $errors);
+
+        throw new ApiProblemException($apiProblem);
     }
 
     /**
@@ -290,7 +307,6 @@ abstract class BaseController implements ControllerProviderInterface
      */
     protected function enforceProgrammerOwnershipSecurity(Programmer $programmer)
     {
-
         $this->enforceUserSecurity();
 
         if ($programmer->userId !== $this->getLoggedInUser()->id) {
@@ -324,4 +340,6 @@ abstract class BaseController implements ControllerProviderInterface
 
         return new ParameterBag($data);
     }
+
+
 }
