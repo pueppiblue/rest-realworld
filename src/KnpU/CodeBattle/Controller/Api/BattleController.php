@@ -15,6 +15,8 @@ class BattleController extends BaseController
     {
         $controllers->post('/api/battles', [$this, 'newAction'])
             ->bind('api_battles_create');
+        $controllers->get('/api/battles/{battleId}', [$this, 'showAction'])
+            ->bind('api_battles_show');
     }
 
     /**
@@ -53,5 +55,12 @@ class BattleController extends BaseController
 
         return $this->createApiResponse($battle, 201,
             ['Location' => '']);
+    }
+
+    public function showAction(int $battleId)
+    {
+        $battle = $this->getBattleRepository()->find($battleId);
+
+        return $this->createApiResponse($battle);
     }
 }

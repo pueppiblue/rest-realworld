@@ -54,3 +54,16 @@ Feature: Battle
     And the "Content-Type" header should be "application/problem+json"
     And the "type" property should contain "validation_error"
     And the "errors.projectId" property should contain "Invalid or missing projectId"
+
+  Scenario: GETing a single battle"
+    Given there is a project called "wookie_dance"
+    And there is a programmer called "GeekDev"
+    And there has been a battle between "GeekDev" and "wookie_dance"
+    When I request "GET /api/battles/%battles.last.id%"
+    Then the response status code should be 200
+    And the "Content-Type" header should be "application/json"
+    And the following properties should exist:
+    """
+    didProgrammerWin
+    notes
+    """
