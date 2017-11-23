@@ -35,6 +35,18 @@ class BattleController extends BaseController
         /** @var Project $project */
         $project = $this->getProjectRepository()->find($data->get('projectId'));
 
+        $errors = [];
+        if (!$programmer) {
+            $errors['programmerId'] = 'Invalid or missing programmerId';
+        }
+        if (!$project) {
+            $errors['projectId'] = 'Invalid or missing projectId';
+        }
+
+        if (!empty($errors)) {
+            $this->handleValidationErrors($errors);
+        }
+
         $battle = $battleManager->battle($programmer, $project);
 
 //        $url = $this->generateUrl('user_tokens');

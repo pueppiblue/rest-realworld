@@ -146,6 +146,7 @@ abstract class BaseController implements ControllerProviderInterface
      * Shortcut for saving objects
      *
      * @param $obj
+     * @throws \Exception
      */
     public function save($obj)
     {
@@ -162,6 +163,7 @@ abstract class BaseController implements ControllerProviderInterface
      * Shortcut for deleting objects
      *
      * @param $obj
+     * @throws \Exception
      */
     public function delete($obj)
     {
@@ -194,7 +196,7 @@ abstract class BaseController implements ControllerProviderInterface
      * @param $errors
      * @throws \KnpU\CodeBattle\Api\ApiProblemException
      */
-    private function handleValidationErrors($errors)
+    protected function handleValidationErrors($errors)
     {
         $apiProblem = new ApiProblem(
             422,
