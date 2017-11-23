@@ -4,21 +4,23 @@ namespace KnpU\CodeBattle\Controller;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
+use KnpU\CodeBattle\Api\ApiProblem;
+use KnpU\CodeBattle\Api\ApiProblemException;
+use KnpU\CodeBattle\Application;
 use KnpU\CodeBattle\Model\Programmer;
 use KnpU\CodeBattle\Model\User;
+use KnpU\CodeBattle\Repository\ProgrammerRepository;
+use KnpU\CodeBattle\Repository\ProjectRepository;
 use KnpU\CodeBattle\Repository\UserRepository;
-use KnpU\CodeBattle\Application;
+use KnpU\CodeBattle\Security\Token\ApiTokenRepository;
 use Silex\Application as SilexApplication;
 use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\HttpFoundation\Request;
-use KnpU\CodeBattle\Repository\ProgrammerRepository;
-use KnpU\CodeBattle\Repository\ProjectRepository;
-use KnpU\CodeBattle\Security\Token\ApiTokenRepository;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
@@ -51,8 +53,8 @@ abstract class BaseController implements ControllerProviderInterface
     /**
      * Render a twig template
      *
-     * @param  string $template  The template filename
-     * @param  array  $variables
+     * @param  string $template The template filename
+     * @param  array $variables
      * @return string
      */
     public function render($template, array $variables = array())
@@ -83,9 +85,9 @@ abstract class BaseController implements ControllerProviderInterface
     }
 
     /**
-     * @param  string $routeName  The name of the route
-     * @param  array  $parameters Route variables
-     * @param  bool   $absolute
+     * @param  string $routeName The name of the route
+     * @param  array $parameters Route variables
+     * @param  bool $absolute
      * @return string A URL!
      */
     public function generateUrl($routeName, array $parameters = array(), $absolute = false)
@@ -98,8 +100,8 @@ abstract class BaseController implements ControllerProviderInterface
     }
 
     /**
-     * @param  string           $url
-     * @param  int              $status
+     * @param  string $url
+     * @param  int $status
      * @return RedirectResponse
      */
     public function redirect($url, $status = 302)
@@ -254,7 +256,8 @@ abstract class BaseController implements ControllerProviderInterface
      * @param array $headers
      * @return Response
      */
-    protected function createApiResponse($data, $statusCode = 200, $headers = []) {
+    protected function createApiResponse($data, $statusCode = 200, $headers = [])
+    {
 
         $json = $this->serialize($data);
 
@@ -270,7 +273,8 @@ abstract class BaseController implements ControllerProviderInterface
      *
      * @throws \Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException
      */
-    protected function enforceUserSecurity() {
+    protected function enforceUserSecurity()
+    {
         if (!$this->getLoggedInUser()) {
             throw new AuthenticationCredentialsNotFoundException('Authentication Required!');
         }
@@ -283,12 +287,40 @@ abstract class BaseController implements ControllerProviderInterface
      * @param Programmer $programmer
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
-    protected function enforceProgrammerOwnerShipSecurity(Programmer $programmer) {
+    protected function enforceProgrammerOwnerShipSecurity(Programmer $programmer)
+    {
 
         $this->enforceUserSecurity();
 
         if ($programmer->userId !== $this->getLoggedInUser()->id) {
             throw new AccessDeniedException('You are not the owner of this programmer.');
         }
+    }
+
+    /**
+     * @param Request $request
+     * @param string $bodyFormat expected format of request content
+     * @param bool $assoc return associative array or StdClass object
+     * @return array
+     * @throws \KnpU\CodeBattle\Api\ApiProblemException
+     */
+    protected function decodeRequestBodyIntoParameters(Request $request, $bodyFormat = 'json', bool $assoc = true)
+    {
+        switch ($bodyFormat) {
+            case 'json':
+                $data = json_decode($request->getContent(), $assoc);
+        }
+
+        if ($data === null) {
+            $apiProblem = new ApiProblem(
+                400,
+                ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT
+            );
+            throw new ApiProblemException(
+                $apiProblem
+            );
+        }
+
+        return $data;
     }
 }

@@ -29,7 +29,7 @@ class TokenController extends BaseController
         $this->enforceUserSecurity();
 
         $token = new ApiToken($this->getLoggedInUser()->id);
-        $data = json_decode($request->getContent(), true);
+        $data = $this->decodeRequestBodyIntoParameters($request);
         $token->notes = $data['notes'];
 
         try {

@@ -11,7 +11,6 @@ use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
 class ProgrammerController extends BaseController
 {
@@ -148,18 +147,7 @@ class ProgrammerController extends BaseController
     private function handleRequest(Request $request, Programmer $programmer)
     {
 
-        $data = json_decode($request->getContent(), true);
-
-        if ($data === null) {
-            $apiProblem = new ApiProblem(
-                400,
-                ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT
-            );
-            throw new ApiProblemException(
-                $apiProblem
-            );
-        }
-
+        $data = $this->decodeRequestBodyIntoParameters($request);
         $isNew = ($programmer->id === null);
 
         // define properties managed by the api
