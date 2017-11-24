@@ -2,6 +2,7 @@
 
 namespace KnpU\CodeBattle\Model;
 
+use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -9,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Programmer
  * @package KnpU\CodeBattle\Model
  * @Serializer\ExclusionPolicy("all")
+ * @Hateoas\Relation("self", href="expr('/api/programmers/' ~ object.nickname)")
  */
 class Programmer
 {

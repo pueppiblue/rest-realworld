@@ -40,7 +40,7 @@ Feature: Programmer
     And the "errors.nickname" property should exist
     And the "errors.avatarNumber" property should not exist
 
-  Scenario: Invalid JSON sent in request
+  Scenario: Invalid JSON sent in POST request
     Given I have the payload:
       """
         {
@@ -68,6 +68,7 @@ Feature: Programmer
       """
     And the "nickname" property should equal "UnitTester"
     And the "userId" property should not exist
+    And the "_links.self.href" property should equal "/api/programmers/UnitTester"
 
   Scenario: GET non-existent programmer results in JSON 404 Response
     When I request "GET /api/programmers/non-existent-programmer"
